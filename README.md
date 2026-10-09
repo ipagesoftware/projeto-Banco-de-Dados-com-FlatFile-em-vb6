@@ -61,7 +61,7 @@ Ela permite:
 * Encerrar a operação
 
 
-## Identificação Geral dos Componentes
+## Identificação Geral dos Componentes e Seus Respectivos Nomes
 
 ![Tela_5](images/FrmProduto.png)
 
