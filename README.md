@@ -34,6 +34,30 @@ Ela permite:
 
 ![Tela_3](images/FrmMain3.png)
 
+
+| Nº | Componente | Identificação | Descrição |
+| :-: | :--- | :--- | :--- |
+| **1** | Formulário principal | `FrmMain` | Primeiro contêiner da aplicação. Organiza menus. |
+| **2** | Menu Principal | `MnuPrincipal` | Menu superior destinado ao acesso do `cadastro de produtos` e ao `menu sair`. |
+| **3** | Sub Menu | `MnuProduto` | Menu que aciona o cadastro de cadastro. |
+| **4** | Sub Menu | `MnuAjuda` | Menu responsável pelo suporte a Informa ao usuário que a caixa de texto deve ser utilizada para pesquisar e que a barra de ferramentas permite interagir com os dados. |
+| **5** | Barra de ferramentas |`BtnInicio, BtnAnterior, BtnProximo, BtnUltimo, BtnAtualizar, BtnInserir, BtnEditar, BtnExcluir, BtnImprimir, BtnSair` | Concentra as operações de navegação, atualização, inclusão, alteração, exclusão, impressão e saída. |
+| **6** | Grupo de pesquisa | `FramePesquisar` | Área destinada à localização de produtos. |
+| **7** | Campo de pesquisa | `TxtPesqusiar` | Caixa de texto utilizada para digitar o nome ou parte do nome do produto a ser localizado. |
+| **8** | Lista de produtos | `ListPesquisa` | Exibe os produtos encontrados. O usuário pode selecionar um item para visualizar seus dados no painel à direita. |
+| **9** | Contador de registros | `Total Registro(s): 1 de 25` | Indica a quantidade de registros disponíveis e a posição do registro atualmente selecionado. |
+| **10** | Grupo de dados | `FrameDados` | Área que apresenta os campos do produto selecionado e permite sua manutenção. |
+| **11** | Código | `TxtCodigo` | Identificador do produto. Normalmente corresponde à chave primária do registro. |
+| **12** | Nome | `TxtNome` | Descrição/nome comercial do produto. |
+| **13** | Preço de compra | `TxtPrecoCoompra` | Valor de aquisição ou custo unitário do produto. |
+| **14** | Preço de venda | `TxtPrecoVenda` | Valor utilizado para venda do produto. |
+| **15** | Quantidade | `TxtQuantidade` | Quantidade de unidades ou estoque associado ao produto. |
+| **16** | Total pago | `TxtTotalPago` | Valor total pago, normalmente relacionado à quantidade adquirida multiplicada pelo preço de compra ou ao valor registrado na operação. |
+| **17** | Preço tabela | `TxtPrecoTabela` | Preço de referência/tabela do produto. |
+| **18** | Último preço | `TxtUltimoPreco` | Último preço registrado para o produto. |
+| **19** | Barra de status | `LblDataBase` | Exibe o local da base de dados utilizada pela aplicação (`produtos.dat`). |
+
+---
 ---
 
 
