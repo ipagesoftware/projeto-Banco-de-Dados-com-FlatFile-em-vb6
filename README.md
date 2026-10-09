@@ -32,7 +32,7 @@ Ela permite:
 
 ![Tela_6](images/FrmProduto.png)
 
-## 📌 Objetivo da Tela
+## 📌 OBJETIVO DA TELA
 
 A tela de **Cadastro de Produtos** é um CRUD (*Create, Read, Update e Delete*) destinado ao cadastro e à manutenção de produtos.
 
@@ -49,7 +49,7 @@ Ela permite:
 
 ---
 
-## 🔍 Identificação Geral dos Componentes
+## 🔍 IDENTIFICAÇÃO GERAL DOS COMPONENTES
 
 | Nº | Componente | Identificação | Descrição |
 | :-: | :--- | :--- | :--- |
@@ -75,7 +75,7 @@ Ela permite:
 
 ---
 
-## 🛠️ Barra de Ferramentas — Funções
+## 🛠️ BARRA DE FERRAMENTAS — FUNÇÕES
 
 | Ícone / Ação | Operação | Função |
 | :-: | :--- | :--- |
@@ -92,7 +92,7 @@ Ela permite:
 
 ---
 
-## 🔄 Fluxo de Utilização do CRUD
+## 🔄 FLUXO DE UTILIZAÇÃO DO CRUD
 
 1. **Pesquisar:** O usuário informa o nome do produto no campo `NOME PRODUTO`[cite: 11].
 2. **Localizar:** A lista apresenta os produtos compatíveis com o critério informado[cite: 11].
@@ -107,7 +107,7 @@ Ela permite:
 
 ---
 
-## 🧱 Estrutura Lógica Sugerida do CRUD
+## 🧱 ESTRUTURA LÓGICA SUGERIDA DO CRUD
 
 A tela é organizada conceitualmente em quatro grupos de operações[cite: 11]:
 
@@ -118,7 +118,7 @@ A tela é organizada conceitualmente em quatro grupos de operações[cite: 11]:
 
 ---
 
-## ⚙️ Observações sobre a Implementação
+## ⚙️ OBSERVAÇÕES SOBRE A IMPLEMENTAÇÃO
 
 * **Base de Dados em Arquivo:** A aplicação utiliza armazenamento via arquivo plano, conforme indicado na barra de status: `C:\ipagesoftware\Exemplos\FlatFile\database\produtos.dat`[cite: 11].
 * **Mecanismo de Seleção:** A lista de produtos funciona como seleção dos registros, enquanto o painel `DADOS` apresenta os campos do item selecionado[cite: 11].
@@ -126,6 +126,6 @@ A tela é organizada conceitualmente em quatro grupos de operações[cite: 11]:
 
 ---
 
-## 🏗️ Visão Geral da Arquitetura de Telas
+## 🏗️ VISÃO GERAL DA ARQUITETURA DE TELAS
 
 O módulo é composto por uma **tela principal de navegação e consulta (`FrmProduto`)**, duas **janelas modais de operação (`FrmInsert` e `FrmEdit`)**, uma **caixa de diálogo para confirmação de exclusão** e um **gerador/preview de relatório**[cite: 11].
