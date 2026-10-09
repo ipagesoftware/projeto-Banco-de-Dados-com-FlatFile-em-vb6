@@ -22,6 +22,21 @@ Ela permite:
 
 ---
 
+## VISÃO GERAL DOS COMPONENTES DA TELA PRINCIPAL E SEUS RESPECTIVOS NOMES
+
+![Tela_3](images/FrmMain.png)
+
+---
+
+## VISÃO GERAL DOS COMPONENTES DA TELA PRINCIPAL E SEUS RESPECTIVOS EVENTOS
+
+![Tela_3](images/FrmMain2.png)
+
+![Tela_3](images/FrmMain3.png)
+
+---
+
+
 ## TELA CADASTRO DE PRODUTOS
 
 ![Tela_4](images/tela_cadproduto.png)
@@ -130,3 +145,7 @@ A tela é organizada conceitualmente em quatro grupos de operações:
 ## 🏗️ VISÃO GERAL DA ARQUITETURA DE TELAS
 
 O módulo é composto por uma **tela principal de navegação e consulta (`FrmProduto`)**, duas **janelas modais de operação (`FrmInsert` e `FrmEdit`)**, uma **caixa de diálogo para confirmação de exclusão** e um **gerador/preview de relatório**.
+
+
+
+
