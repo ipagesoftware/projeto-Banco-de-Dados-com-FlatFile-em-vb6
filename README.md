@@ -8,7 +8,7 @@
 
 ---
 
-## 📌 OBJETIVO DA TELA PRINCIPAL
+## 📌 Objetivo da Tela Principal
 A tela **Principal (FrmMain)** possui os menus **Principal** e o menu **Ajuda**
 
 Ela permite:
@@ -22,13 +22,13 @@ Ela permite:
 
 ---
 
-## VISÃO GERAL DOS COMPONENTES DA TELA PRINCIPAL E SEUS RESPECTIVOS NOMES
+## Visão Geral dos Componentes da Tela Principal e Seus Respectivos Nomes
 
 ![Tela_3](images/FrmMain.png)
 
 ---
 
-## VISÃO GERAL DOS COMPONENTES DA TELA PRINCIPAL E SEUS RESPECTIVOS EVENTOS
+## Visão Geral dos Componentes da Tela Principal e Seus Respectivos Eventos
 
 ![Tela_3](images/FrmMain2.png)
 
@@ -37,13 +37,13 @@ Ela permite:
 ---
 
 
-## TELA CADASTRO DE PRODUTOS
+## Tela Cadastro de Produtos
 
 ![Tela_4](images/tela_cadproduto.png)
 
 ---
 
-## 📌 OBJETIVO DA TELA
+## Objetivo da Tela
 
 A tela de **Cadastro de Produtos** é um CRUD (*Create, Read, Update e Delete*) destinado ao cadastro e à manutenção de produtos.
 
@@ -61,7 +61,7 @@ Ela permite:
 * Encerrar a operação
 
 
-## 🔍 IDENTIFICAÇÃO GERAL DOS COMPONENTES
+## Identificação Geral dos Componentes
 
 ![Tela_5](images/FrmProduto.png)
 
@@ -91,7 +91,7 @@ Ela permite:
 
 ---
 
-## 🛠️ BARRA DE FERRAMENTAS — FUNÇÕES
+## Barra de Ferramentas - Funções
 
 | Ação | Operação | Função |
 | :-: | :--- | :--- |
@@ -108,7 +108,7 @@ Ela permite:
 
 ---
 
-## 🔄 FLUXO DE UTILIZAÇÃO DO CRUD
+## Fluxo de Utilização do CRUD
 
 1. **Pesquisar:** O usuário informa o nome do produto no campo `NOME PRODUTO`.
 2. **Localizar:** A lista apresenta os produtos compatíveis com o critério informado.
@@ -123,7 +123,7 @@ Ela permite:
 
 ---
 
-## 🧱 ESTRUTURA LÓGICA SUGERIDA DO CRUD
+## Estrutura Lógica Sugerida do CRUD
 
 A tela é organizada conceitualmente em quatro grupos de operações:
 
@@ -134,7 +134,7 @@ A tela é organizada conceitualmente em quatro grupos de operações:
 
 ---
 
-## ⚙️ OBSERVAÇÕES SOBRE A IMPLEMENTAÇÃO
+## Observações Sobre a Implementação
 
 * **Base de Dados em Arquivo:** A aplicação utiliza armazenamento via arquivo plano, conforme indicado na barra de status: `C:\ipagesoftware\Exemplos\FlatFile\database\produtos.dat`.
 * **Mecanismo de Seleção:** A lista de produtos funciona como seleção dos registros, enquanto o painel `DADOS` apresenta os campos do item selecionado.
@@ -142,7 +142,7 @@ A tela é organizada conceitualmente em quatro grupos de operações:
 
 ---
 
-## 🏗️ VISÃO GERAL DA ARQUITETURA DE TELAS
+## Visão Geral da Arquitetura de Telas
 
 O módulo é composto por uma **tela principal de navegação e consulta (`FrmProduto`)**, duas **janelas modais de operação (`FrmInsert` e `FrmEdit`)**, uma **caixa de diálogo para confirmação de exclusão** e um **gerador/preview de relatório**.
 
