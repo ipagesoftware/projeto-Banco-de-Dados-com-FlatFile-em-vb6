@@ -18,17 +18,23 @@ Ela permite:
 
 ![Tela_2](images/FrmMain7.png)
 
-![Tela_2](images/FrmMain5.png)
+![Tela_3](images/FrmMain5.png)
 
 ---
 
 ## TELA CADASTRO DE PRODUTOS
 
-![Tela_6](images/tela_cadproduto.png)
+![Tela_4](images/tela_cadproduto.png)
+
+---
 
 ## 📌 OBJETIVO DA TELA
 
 A tela de **Cadastro de Produtos** é um CRUD (*Create, Read, Update e Delete*) destinado ao cadastro e à manutenção de produtos.
+
+![Tela_5](images/FrmProduto.png)
+
+---
 
 Ela permite:
 * Localizar registros existentes
