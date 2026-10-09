@@ -4,7 +4,7 @@
 
 ## TELA PRINCIPAL
 
-![Tela_1](images/FrmMain7.png)
+![Tela_1](images/FrmMain6.png)
 ---
 
 ## 📌 OBJETIVO DA TELA PRINCIPAL
@@ -15,6 +15,8 @@ Ela permite:
 * Encerrar a operação
 * Acesso ao menu **Ajuda**
 
+![Tela_2](images/FrmMain7.png)
+---
 
 ## TELA CADASTRO DE PRODUTOS
 
