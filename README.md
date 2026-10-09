@@ -78,18 +78,18 @@ Ela permite:
 
 ## 🛠️ BARRA DE FERRAMENTAS — FUNÇÕES
 
-| Ícone / Ação | Operação | Função |
+| Ação | Operação | Função |
 | :-: | :--- | :--- |
-| `|<` | **Primeiro registro** | Move o cursor para o primeiro produto do cadastro. |
-| `<` | **Registro anterior** | Volta um registro na sequência atual. |
-| `>` | **Próximo registro** | Avança um registro na sequência atual. |
-| `>|` | **Último registro** | Move o cursor para o último produto do cadastro. |
-| 🔄 | **Atualizar / Recarregar** | Atualiza os dados exibidos, relendo ou sincronizando os registros da fonte de dados. |
-| ➕ | **Novo / Incluir** | Inicia o cadastramento de um novo produto, limpando/preparando os campos para edição. |
-| ✏️ | **Alterar / Editar** | Coloca o produto atual em modo de edição para permitir alterações. |
-| ❌ | **Excluir** | Remove o produto selecionado, normalmente após confirmação do usuário. |
-| 🖨️ | **Imprimir** | Executa ou prepara a impressão dos dados/relatório relacionado ao cadastro. |
-| 🚪 | **Sair / Fechar** | Encerra a tela atual ou retorna ao módulo anterior. |
+| ![Btn1](images/btn_inicio.png) | **Primeiro registro** | Move o cursor para o primeiro produto do cadastro. |
+| ![Btn2](images/btn_anterior.png) | **Registro anterior** | Volta um registro na sequência atual. |
+| ![Btn3](images/btn_proximo.png) | **Próximo registro** | Avança um registro na sequência atual. |
+| ![Btn4](images/btn_ultimo.png) | **Último registro** | Move o cursor para o último produto do cadastro. |
+| ![Btn](images/btn_atualizar.png) | **Atualizar** | Atualiza os dados exibidos, relendo ou sincronizando os registros da fonte de dados. |
+| ![Btn](images/btn_inserir.png) | **Novo / Incluir** | Inicia o cadastramento de um novo produto, limpando/preparando os campos para edição. |
+| ![Btn](images/btn_editar.png) | **Alterar / Editar** | Coloca o produto atual em modo de edição para permitir alterações. |
+| ![Btn](images/btn_excluir.png) | **Excluir** | Remove o produto selecionado, normalmente após confirmação do usuário. |
+| ![Btn](images/btn_imprimir.png) | **Imprimir** | Executa ou prepara a impressão dos dados/relatório relacionado ao cadastro. |
+| ![Btn](images/btn_sair.png) | **Sair / Fechar** | Encerra a tela atual ou retorna ao módulo anterior. |
 
 ---
 
