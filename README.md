@@ -5,6 +5,7 @@
 ## TELA PRINCIPAL
 
 ![Tela_1](images/FrmMain6.png)
+
 ---
 
 ## 📌 OBJETIVO DA TELA PRINCIPAL
@@ -16,11 +17,14 @@ Ela permite:
 * Acesso ao menu **Ajuda**
 
 ![Tela_2](images/FrmMain7.png)
+
+![Tela_2](images/FrmMain5.png)
+
 ---
 
 ## TELA CADASTRO DE PRODUTOS
 
-![Tela_6](images/FrmProduto.png)
+![Tela_6](images/tela_cadproduto.png)
 
 ## 📌 OBJETIVO DA TELA
 
