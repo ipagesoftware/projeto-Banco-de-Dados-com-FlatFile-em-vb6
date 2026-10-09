@@ -45,11 +45,12 @@ Ela permite:
 * Imprimir informações
 * Encerrar a operação
 
+
+## 🔍 IDENTIFICAÇÃO GERAL DOS COMPONENTES
+
 ![Tela_5](images/FrmProduto.png)
 
 ---
-
-## 🔍 IDENTIFICAÇÃO GERAL DOS COMPONENTES
 
 | Nº | Componente | Identificação | Descrição |
 | :-: | :--- | :--- | :--- |
