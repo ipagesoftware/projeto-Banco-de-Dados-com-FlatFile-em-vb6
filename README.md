@@ -10,18 +10,18 @@
 ## 📌 OBJETIVO DA TELA PRINCIPAL
 A tela **Principal (FrmMain)** possui os menus **Principal** e o menu **Ajuda**
 
-![Tela_2](images/FrmMain7.png)
+![Tela_2](images/FrmMain9.png)
 
-![Tela_3](images/FrmMain5.png)
+![Tela_3](images/FrmMain10.png)
 
 Ela permite:
 * Chamar o **Cadastro de Produtos**
 
-![Tela_4](images/FrmMain2.png)
+![Tela_4](images/tela_cadproduto.png)
 
 * Encerrar a operação
 
-![Tela_4](images/FrmMain2.png)
+![Tela_5](images/FrmMain8.png)
 
 
 * Acesso ao menu **Ajuda**;
