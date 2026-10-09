@@ -2,10 +2,32 @@
 
 > **Descrição funcional dos componentes de um CRUD de produtos.**
 
-## JANELA PRINCIPAL
+## TELA PRINCIPAL
 
 ![Tela_1](images/FrmMain6.png)
 ---
+
+## 📌 OBJETIVO DA TELA PRINCIPAL
+A tela **Principal (FrmMain)** possui os menus **Principal** e o menu **Ajuda**
+
+![Tela_2](images/FrmMain7.png)
+
+![Tela_3](images/FrmMain5.png)
+
+Ela permite:
+* Chamar o **Cadastro de Produtos**
+
+![Tela_4](images/FrmMain2.png)
+
+* Encerrar a operação
+
+![Tela_4](images/FrmMain2.png)
+
+
+* Acesso ao menu **Ajuda**;
+
+---
+
 
 ## 📌 Objetivo da Tela
 
