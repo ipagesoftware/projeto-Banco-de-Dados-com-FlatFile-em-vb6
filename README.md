@@ -26,19 +26,26 @@ Ela permite:
 
 * Acesso ao menu **Ajuda**;
 
-![Tela_5](images/FrmMain5.png)
+![Tela_6](images/FrmMain5.png)
 
+## TELA CADASTRO DE PRODUTOS
+
+![Tela_6](images/FrmProduto.png)
 
 ## 📌 Objetivo da Tela
 
-A tela de **Cadastro de Produtos** é um CRUD (*Create, Read, Update e Delete*) destinado ao cadastro e à manutenção de produtos[cite: 11]. Ela permite:
-* Localizar registros existentes[cite: 11];
-* Navegar entre os registros[cite: 11];
-* Incluir novos produtos[cite: 11];
-* Alterar dados[cite: 11];
-* Excluir registros[cite: 11];
-* Imprimir informações[cite: 11];
-* Encerrar a operação[cite: 11].
+A tela de **Cadastro de Produtos** é um CRUD (*Create, Read, Update e Delete*) destinado ao cadastro e à manutenção de produtos.
+
+Ela permite:
+* Localizar registros existentes
+* Navegar entre os registros
+* Incluir novos produtos
+* Alterar dados
+* Excluir registros
+* Imprimir informações
+* Encerrar a operação
+
+![Tela_6](images/FrmProduto2.png)
 
 ---
 
