@@ -32,7 +32,7 @@ Ela permite:
 
 A tela de **Cadastro de Produtos** é um CRUD (*Create, Read, Update e Delete*) destinado ao cadastro e à manutenção de produtos.
 
-![Tela_5](images/FrmProduto.png)
+![Tela_6](images/FrmProduto2.png)
 
 ---
 
@@ -45,7 +45,7 @@ Ela permite:
 * Imprimir informações
 * Encerrar a operação
 
-![Tela_6](images/FrmProduto2.png)
+![Tela_5](images/FrmProduto.png)
 
 ---
 
