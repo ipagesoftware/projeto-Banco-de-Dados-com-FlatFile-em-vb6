@@ -26,7 +26,7 @@ Ela permite:
 
 * Acesso ao menu **Ajuda**;
 
----
+![Tela_5](images/FrmMain5.png)
 
 
 ## 📌 Objetivo da Tela
