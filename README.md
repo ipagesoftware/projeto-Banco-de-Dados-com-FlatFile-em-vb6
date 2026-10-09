@@ -1,7 +1,10 @@
-# Documentação da Tela — Cadastro de Produtos (Ver. 1.0)[cite: 11]
+# Documentação da Tela — Cadastro de Produtos (Ver. 1.0)
 
-> **Descrição funcional dos componentes de um CRUD de produtos.**[cite: 11]
+> **Descrição funcional dos componentes de um CRUD de produtos.**
 
+## JANELA PRINCIPAL
+
+![Tela_1](images/FrmMain6.png)
 ---
 
 ## 📌 Objetivo da Tela
