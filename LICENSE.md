@@ -49,5 +49,5 @@ replace or modify third-party licenses.
 
 ## Project References
 
-- FBIDE: https://fbide.freebasic.net
-- FBIDE source repository: https://github.com/albeva/fbide
+- FBIDE: https://ipage.com.br
+- FBIDE source repository: https://github.com/ipagesoftware/projeto-Banco-de-Dados-com-FlatFile-em-vb6
