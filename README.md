@@ -22,14 +22,6 @@ Ela permite:
 
 ---
 
-## Visão Geral dos Componentes da Tela Principal e Seus Respectivos Nomes
-
-![Tela_3](images/FrmMain.png)
-
----
--
-
-
 ## Tela Cadastro de Produtos
 
 ![Tela_4](images/tela_cadproduto.png)
