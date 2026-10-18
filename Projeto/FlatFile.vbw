@@ -1,0 +1,9 @@
+frmProduto = 52, 52, 921, 544, C, 26, 26, 843, 425, C
+clsMaskEdit = 0, 0, 921, 374, C
+basMain = 78, 78, 947, 570, 
+frmMain = 130, 130, 999, 622, Z, 104, 104, 973, 596, C
+frmInsert = 130, 130, 999, 622, C, 104, 104, 973, 596, C
+basProduto = 156, 156, 1025, 648, C
+frmEdit = 156, 156, 1025, 648, C, 130, 130, 999, 622, C
+basWindowsApi = 156, 156, 1025, 648, C
+basProdutoReport = 78, 78, 947, 570, C
