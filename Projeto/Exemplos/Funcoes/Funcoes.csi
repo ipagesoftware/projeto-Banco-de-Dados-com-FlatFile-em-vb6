@@ -1,0 +1,5 @@
+[History]
+1=#P0#=mb	#P1#=ValidarSenhaAdmin	#P2#=Funcoes/BasMain/ValidarSenhaAdmin	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20261014015058	#P7#=0	#P8#=8	.
+2=#P0#=mb	#P1#=btnCalcular_Click	#P2#=Funcoes/Form1/btnCalcular_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20261014013825	#P7#=0	#P8#=9	.
+3=#P0#=mb	#P1#=btnLogin_Click	#P2#=Funcoes/Form1/btnLogin_Click	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20261014012935	#P7#=0	#P8#=4	.
+4=#P0#=mb	#P1#=CalcularTotalVenda	#P2#=Funcoes/BasMain/CalcularTotalVenda	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20261014012304	#P7#=0	#P8#=-1	.
