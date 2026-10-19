@@ -39,8 +39,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-
-Private Sub btnTestarConta_Click()
+Private Sub cmdTestarConta_Click()
     ' 1. Declaração da variável do tipo da Classe
     Dim minhaConta As clsContaBancaria
     
@@ -62,5 +61,3 @@ Private Sub btnTestarConta_Click()
     ' 4. Destruição do objeto (Dispara Class_Terminate e libera a RAM)
     Set minhaConta = Nothing
 End Sub
-
-
