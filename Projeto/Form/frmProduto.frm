@@ -119,7 +119,7 @@ Begin VB.Form frmProduto
          Height          =   240
          Left            =   150
          Picture         =   "frmProduto.frx":0E42
-         ToolTipText     =   "Chave Prim·ria"
+         ToolTipText     =   "Chave Prim√°ria"
          Top             =   1140
          Width           =   240
       End
@@ -130,14 +130,14 @@ Begin VB.Form frmProduto
          Height          =   225
          Left            =   480
          TabIndex        =   34
-         ToolTipText     =   "Chave Prim·ria"
+         ToolTipText     =   "Chave Prim√°ria"
          Top             =   1170
          Width           =   600
       End
       Begin VB.Label lblPrecoVenda 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "PRE«O VENDA R$:"
+         Caption         =   "PRE√áO VENDA R$:"
          Height          =   225
          Left            =   2310
          TabIndex        =   33
@@ -147,7 +147,7 @@ Begin VB.Form frmProduto
       Begin VB.Label lblPrecoCompra 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "PRE«O COMPRA R$:"
+         Caption         =   "PRE√áO COMPRA R$:"
          Height          =   225
          Left            =   150
          TabIndex        =   32
@@ -177,7 +177,7 @@ Begin VB.Form frmProduto
       Begin VB.Label lblUltimoPreco 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "⁄LTIMO PRE«O R$"
+         Caption         =   "√öLTIMO PRE√áO R$"
          Height          =   225
          Left            =   2310
          TabIndex        =   29
@@ -187,7 +187,7 @@ Begin VB.Form frmProduto
       Begin VB.Label lblPrecoTabela 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "PRE«O TABELA R$"
+         Caption         =   "PRE√áO TABELA R$"
          Height          =   225
          Left            =   150
          TabIndex        =   28
@@ -198,18 +198,18 @@ Begin VB.Form frmProduto
          Height          =   240
          Left            =   180
          Picture         =   "frmProduto.frx":13CC
-         ToolTipText     =   "Chave Prim·ria"
+         ToolTipText     =   "Chave Prim√°ria"
          Top             =   330
          Width           =   240
       End
       Begin VB.Label lblCodigo 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "C”DIGO:"
+         Caption         =   "C√ìDIGO:"
          Height          =   225
          Left            =   510
          TabIndex        =   27
-         ToolTipText     =   "Chave Prim·ria"
+         ToolTipText     =   "Chave Prim√°ria"
          Top             =   360
          Width           =   840
       End
@@ -240,7 +240,7 @@ Begin VB.Form frmProduto
          Height          =   240
          Left            =   120
          Picture         =   "frmProduto.frx":1956
-         ToolTipText     =   "Chave Prim·ria"
+         ToolTipText     =   "Chave Prim√°ria"
          Top             =   330
          Width           =   240
       End
@@ -251,7 +251,7 @@ Begin VB.Form frmProduto
          Height          =   225
          Left            =   450
          TabIndex        =   25
-         ToolTipText     =   "Chave Prim·ria"
+         ToolTipText     =   "Chave Prim√°ria"
          Top             =   360
          Width           =   1560
       End
@@ -328,7 +328,7 @@ Begin VB.Form frmProduto
          Picture         =   "frmProduto.frx":3BDC
          Style           =   1  'Graphical
          TabIndex        =   2
-         ToolTipText     =   "Move os dados para o prÛximo registro"
+         ToolTipText     =   "Move os dados para o pr√≥ximo registro"
          Top             =   160
          Width           =   600
       End
@@ -348,7 +348,7 @@ Begin VB.Form frmProduto
          Picture         =   "frmProduto.frx":3E70
          Style           =   1  'Graphical
          TabIndex        =   0
-         ToolTipText     =   "Move os dados para o inÌcio do registro"
+         ToolTipText     =   "Move os dados para o in√≠cio do registro"
          Top             =   160
          Width           =   600
       End
@@ -458,9 +458,9 @@ Begin VB.Form frmProduto
       End
    End
    Begin VB.Menu mnuNavegacao 
-      Caption         =   "&NavegaÁ„o"
+      Caption         =   "&Navega√ß√£o"
       Begin VB.Menu mnuInicio 
-         Caption         =   "&InÌcio"
+         Caption         =   "&In√≠cio"
          Shortcut        =   ^I
       End
       Begin VB.Menu mnuAnterior 
@@ -468,11 +468,11 @@ Begin VB.Form frmProduto
          Shortcut        =   ^A
       End
       Begin VB.Menu mnuProximo 
-         Caption         =   "P&rÛximo"
+         Caption         =   "P&r√≥ximo"
          Shortcut        =   ^R
       End
       Begin VB.Menu mnuUltimo 
-         Caption         =   "&⁄ltimo"
+         Caption         =   "&√öltimo"
          Shortcut        =   ^U
       End
    End
@@ -506,17 +506,17 @@ Attribute VB_Exposed = False
 '      ( (__  )(( (__  ) _)  )   /(  O )   ) D ( )( /    \\___ \
 '       \___)(__)\___)(____)(__\_) \__/   (____/(__)\_/\_/(____/
 '
-' © Copyright Ipage Software - DiÛgenes Dias - 1995/2026
+' ¬© Copyright Ipage Software - Di√≥genes Dias - 1995/2026
 ' Visite meu github: https://github.com/ipagesoftware
 '
 '
-Option Explicit 'FOR«A DECLARA«√O DO TIPO DA VARI¡VEL
+Option Explicit 'FOR√áA DECLARA√á√ÉO DO TIPO DA VARI√ÅVEL
 
 Private mValue As String
 
 Private Sub btnAnterior_Click()
   '---------------------
-  ' DEFINI«√O VARI¡VEIS
+  ' DEFINI√á√ÉO VARI√ÅVEIS
   '---------------------
   Dim RecordSet As Long
   '
@@ -527,7 +527,7 @@ End Sub
 
 Private Sub btnEditar_Click()
   '---------------------
-  ' DEFINI«√O VARI¡VEIS
+  ' DEFINI√á√ÉO VARI√ÅVEIS
   '---------------------
   Dim RecordSet As Long
   Dim Dados     As String
@@ -546,7 +546,7 @@ Private Sub btnEditar_Click()
       .Dados = Dados
       .RecordSet = RecordSet
       .Show vbModal
-      'Call CarregarDados
+      Call CarregarDados
       ListPesquisar.ListIndex = RecordSet - 1
     End With
   End If
@@ -555,10 +555,10 @@ End Sub
 
 Private Function ValorPadrao() As String
   '---------------------
-  ' DEFINI«√O VARI¡VEIS
+  ' DEFINI√á√ÉO VARI√ÅVEIS
   '---------------------
   Dim Tmp As String
-  ' MONTA O VALOR PADR√O DE RETORNO
+  ' MONTA O VALOR PADR√ÉO DE RETORNO
   Tmp = TxtNome.Tag & "|" 'Nome
   Tmp = Tmp & TxtCodigo.Tag & "|" 'Codigo
   Tmp = Tmp & TxtPrecoCompra.Tag & "|" 'PrecoCompra
@@ -572,7 +572,7 @@ End Function
 
 Private Function RetornarRegistro(ByVal RecordSet As Long) As String
   '---------------------
-  ' DEFINI«√O VARI¡VEIS
+  ' DEFINI√á√ÉO VARI√ÅVEIS
   '---------------------
   Dim Buffer         As Integer
   Dim Produto        As TProduto
@@ -585,11 +585,11 @@ Private Function RetornarRegistro(ByVal RecordSet As Long) As String
   Buffer = FreeFile
   Tmp = ValorPadrao()
   '
-  RetornarRegistro = Tmp 'VALOR PADR√O
+  RetornarRegistro = Tmp 'VALOR PADR√ÉO
   '
   Open dataBaseProduto For Random As #Buffer Len = Len(Produto)
   '
-  TotalRegistros = LOF(Buffer) \ Len(Produto) 'ENCONTRO O N⁄MERO TOTAL DE LINHAS
+  TotalRegistros = LOF(Buffer) \ Len(Produto) 'ENCONTRO O N√öMERO TOTAL DE LINHAS
   '
   Get #Buffer, RecordSet, Produto
   Tmp = Trim$(Produto.Nome) & "|"
@@ -611,18 +611,18 @@ LogErrorHandler:
   Close 'FECHA TODOS OS ARQUIVOS ABERTOS
   Screen.MousePointer = vbDefault
   '------------------------------------
-  ' EXIBE MENSAGEM AMIG¡VEL AO USU¡RIO
+  ' EXIBE MENSAGEM AMIG√ÅVEL AO USU√ÅRIO
   '------------------------------------
-  MsgBox Err.Number & ", " & Err.Description, vbExclamation Or vbOKOnly, "AtenÁ„o"
+  MsgBox Err.Number & ", " & Err.Description, vbExclamation Or vbOKOnly, "Aten√ß√£o"
 End Function
 
 Private Sub btnImprimir_Click()
   '---------------------
-  ' DEFINI«√O VARI¡VEIS
+  ' DEFINI√á√ÉO VARI√ÅVEIS
   '---------------------
   Dim Result As Long
   '
-  Result = MsgBox("Deseja Imprimir o relatÛrio do cadastro produtos?", vbQuestion Or vbYesNo Or vbDefaultButton2, "AtenÁ„o")
+  Result = MsgBox("Deseja Imprimir o relat√≥rio do cadastro produtos?", vbQuestion Or vbYesNo Or vbDefaultButton2, "Aten√ß√£o")
   '
   If Result = vbYes Then
     Call basProdutoReport.GerarRelatorio
@@ -645,7 +645,7 @@ End Sub
 
 Private Sub btnProximo_Click()
   '---------------------
-  ' DEFINI«√O VARI¡VEIS
+  ' DEFINI√á√ÉO VARI√ÅVEIS
   '---------------------
   Dim RecordSet As Long
   Dim Total     As Long
@@ -668,7 +668,7 @@ End Sub
 
 Private Sub btnExcluir_Click()
   '---------------------
-  ' DEFINI«√O VARI¡VEIS
+  ' DEFINI√á√ÉO VARI√ÅVEIS
   '---------------------
   Dim Result        As Long
   Dim RegistroAtual As Long
@@ -680,7 +680,7 @@ Private Sub btnExcluir_Click()
     Exit Sub
   End If
   '
-  Result = MsgBox("Deseja excluir o registro corrente?", vbQuestion Or vbYesNo Or vbDefaultButton2, "AtenÁ„o")
+  Result = MsgBox("Deseja excluir o registro corrente?", vbQuestion Or vbYesNo Or vbDefaultButton2, "Aten√ß√£o")
   '
   If Result = vbYes Then
     Call basProduto.Excluir(RegistroAtual)
@@ -709,7 +709,7 @@ Private Sub ListPesquisar_Click()
   On Error GoTo LogErrorHandler 'ATIVA O TRATAMENTO DE ERROS
   If ListPesquisar.ListCount > 0 Then
     '---------------------
-    ' DEFINI«√O VARI¡VEIS
+    ' DEFINI√á√ÉO VARI√ÅVEIS
     '---------------------
     Dim RegistroAtual As Long
     btnEditar.Enabled = True
@@ -718,7 +718,7 @@ Private Sub ListPesquisar_Click()
     '
     If (ListPesquisar.ListIndex >= 0) Then
       '---------------------
-      ' DEFINI«√O VARI¡VEIS
+      ' DEFINI√á√ÉO VARI√ÅVEIS
       '---------------------
       Dim Dados() As String
       Dados = Split(RetornarRegistro(RegistroAtual), "|")
@@ -731,7 +731,7 @@ Private Sub ListPesquisar_Click()
       TxtTotalPago.Text = Dados(6)
       TxtUltimoPreco.Text = Dados(7)
     Else
-      ' REINICIA O PROCESSO DE GRAVA«√O DE DADOS
+      ' REINICIA O PROCESSO DE GRAVA√á√ÉO DE DADOS
       Call basMain.valorPadraoTextBox(Me)
     End If
   Else
@@ -745,9 +745,9 @@ LogErrorHandler:
   On Error Resume Next 'IGNORA O TRATAMENTO DE ERROS DO VB.
   Screen.MousePointer = vbDefault
   '------------------------------------
-  ' EXIBE MENSAGEM AMIG¡VEL AO USU¡RIO
+  ' EXIBE MENSAGEM AMIG√ÅVEL AO USU√ÅRIO
   '------------------------------------
-  MsgBox Err.Number & ", " & Err.Description, vbExclamation Or vbOKOnly, "AtenÁ„o"
+  MsgBox Err.Number & ", " & Err.Description, vbExclamation Or vbOKOnly, "Aten√ß√£o"
 End Sub
 
 Private Sub ListPesquisar_KeyDown(KeyCode As Integer, Shift As Integer)
@@ -809,7 +809,7 @@ End Sub
 
 Private Sub TxtPesquisar_Change()
   '---------------------
-  ' DEFINI«√O VARI¡VEIS
+  ' DEFINI√á√ÉO VARI√ÅVEIS
   '---------------------
   Dim Result As Long
   '
@@ -820,7 +820,7 @@ End Sub
 
 Private Sub CarregarDados()
   '---------------------
-  ' DEFINI«√O VARI¡VEIS
+  ' DEFINI√á√ÉO VARI√ÅVEIS
   '---------------------
   Dim Buffer         As Integer
   Dim Produto        As TProduto
@@ -828,14 +828,14 @@ Private Sub CarregarDados()
   Dim TotalRegistros As Long
   Dim RecordSet      As Long
 
-  ' LIMPA A CAIXA DE SELE«√O
+  ' LIMPA A CAIXA DE SELE√á√ÉO
   ListPesquisar.Clear
   Call basMain.valorPadraoTextBox(Me)
   '
   Buffer = FreeFile
   '
   Open dataBaseProduto For Random As #Buffer Len = Len(Produto)
-  TotalRegistros = LOF(Buffer) \ Len(Produto) 'ENCONTRO O N⁄MERO TOTAL DE LINHAS
+  TotalRegistros = LOF(Buffer) \ Len(Produto) 'ENCONTRO O N√öMERO TOTAL DE LINHAS
 
   ' INICIO O LOOP FOR
   For Registro = 1 To TotalRegistros
