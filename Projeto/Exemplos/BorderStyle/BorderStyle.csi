@@ -1,0 +1,10 @@
+[History]
+1=#P0#=mb	#P1#=LoadCombo	#P2#=BorderStyle/frmMain/LoadCombo	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20261014025955	#P7#=0	#P8#=7	.
+2=#P0#=mb	#P1#=Form_Load	#P2#=BorderStyle/frmMain/Form_Load	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20261014025932	#P7#=0	#P8#=1	.
+3=#P0#=mb	#P1#=btnExibir_Click	#P2#=BorderStyle/frmMain/btnExibir_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20261014025722	#P7#=0	#P8#=-1	.
+4=#P0#=mb	#P1#=Form_Load	#P2#=BorderStyle/frmNone/Form_Load	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20261014024940	#P7#=0	#P8#=0	.
+5=#P0#=mb	#P1#=Form_Load	#P2#=BorderStyle/frmSizableToolWindow/Form_Load	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20261014023647	#P7#=0	#P8#=1	.
+6=#P0#=mb	#P1#=Form_Load	#P2#=BorderStyle/frmSizable/Form_Load	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20261014023447	#P7#=0	#P8#=7	.
+7=#P0#=mb	#P1#=btnSair_Click	#P2#=BorderStyle/frmFixedDialog/btnSair_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20261014022645	#P7#=0	#P8#=1	.
+8=#P0#=mb	#P1#=btnSair_Click	#P2#=BorderStyle/frmNone/btnSair_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20261014021647	#P7#=0	#P8#=0	.
+9=#P0#=mb	#P1#=btnSair_Click	#P2#=BorderStyle/frmMain/btnSair_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20261014021031	#P7#=0	#P8#=1	.

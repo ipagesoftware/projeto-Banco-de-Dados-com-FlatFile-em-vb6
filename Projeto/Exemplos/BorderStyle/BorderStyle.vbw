@@ -1,0 +1,6 @@
+frmMain = 0, 0, 0, 0, C, 0, 0, 0, 0, C
+frmNone = 0, 0, 0, 0, C, 0, 0, 0, 0, C
+frmFixedDialog = 0, 0, 0, 0, C, 0, 0, 0, 0, C
+frmSizableToolWindow = 0, 0, 0, 0, C, 0, 0, 0, 0, C
+frmSizable = 0, 0, 0, 0, C, 0, 0, 0, 0, C
+frmFixedSingle = 0, 0, 0, 0, C, 0, 0, 0, 0, C
