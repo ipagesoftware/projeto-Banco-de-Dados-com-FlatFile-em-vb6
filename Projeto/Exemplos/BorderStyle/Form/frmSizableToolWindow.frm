@@ -1,11 +1,11 @@
 VERSION 5.00
 Begin VB.Form frmSizableToolWindow 
    BackColor       =   &H00404000&
-   BorderStyle     =   1  'Fixed Single
+   BorderStyle     =   5  'Sizable ToolWindow
    Caption         =   "#"
    ClientHeight    =   3135
-   ClientLeft      =   120
-   ClientTop       =   390
+   ClientLeft      =   135
+   ClientTop       =   405
    ClientWidth     =   5625
    BeginProperty Font 
       Name            =   "Fixedsys"
@@ -22,6 +22,7 @@ Begin VB.Form frmSizableToolWindow
    MinButton       =   0   'False
    ScaleHeight     =   3135
    ScaleWidth      =   5625
+   ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
    Begin VB.CommandButton btnSair 
       Caption         =   "Sair"

@@ -75,8 +75,12 @@ Private Sub btnExibir_Click()
       frmSizable.Show vbModal
     Case 3
       frmFixedDialog.Show vbModal
-    Case Else
+    Case 4
+      frmFixedToolWindow.Show vbModal
+    Case 5
       frmSizableToolWindow.Show vbModal
+    Case Else
+      MsgBox "Valor selecionado para a borda do formulário é inválido, tente outra vez!", vbExclamation
   End Select
   '
   cboBorderStyle.SetFocus
@@ -97,6 +101,7 @@ Private Function LoadCombo()
     .AddItem "Fixed Single"
     .AddItem "Sizable"
     .AddItem "Fixed Dialog"
+    .AddItem "Fixed Tool Window"
     .AddItem "Sizable Tool Window"
   End With
   '
