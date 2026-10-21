@@ -30,17 +30,7 @@ Attribute VB_Name = "basMain"
 Option Explicit 'FORÇA DECLARAÇÃO DO TIPO DA VARIÁVEL
 
 Public Sub Main()
-  On Error GoTo LogErrorHandler 'ATIVA O TRATAMENTO DE ERROS
-  frmMain.Show vbModal
-  Exit Sub
-  'TRATAMENTO DE ERROS
-LogErrorHandler:
-  On Error Resume Next 'IGNORA O TRATAMENTO DE ERROS DO VB.
-  Screen.MousePointer = vbDefault
-  '------------------------------------
-  ' EXIBE MENSAGEM AMIGÁVEL AO USUÁRIO
-  '------------------------------------
-  MsgBox Err.Number & ", " & Err.Description, vbExclamation Or vbOKOnly, "Atenção"
+  frmProduto.Show vbModal
 End Sub
 
 '--------------------------------------------------------------------------------

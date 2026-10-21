@@ -70,7 +70,7 @@ End Sub
 
 ' Aplica a mascara/formato ao TextBox (chame no Form_Load)
 ' Decimals (so para "MOEDA"): numero de casas decimais; omitido = 2
-Public Sub Format$(ByVal txt As Object, ByVal Spec As String, Optional ByVal Decimals As Long = -1)
+Public Sub Format(ByVal txt As Object, ByVal Spec As String, Optional ByVal Decimals As Long = -1)
     Dim it As clsMaskItem
     Release txt                                   ' se ja existia, substitui
     Set it = New clsMaskItem
@@ -120,7 +120,7 @@ End Function
 
 Private Function KeyOf(ByVal txt As Object) As String
     KeyOf = "k" & Hex$(txt.hwnd)
-End Function '
+End Function
 '/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 '> Nome                  : SelText                                        <
 '> Data/Hora             : 29/10/2006 21:27                               <

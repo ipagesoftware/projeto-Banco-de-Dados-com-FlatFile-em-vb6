@@ -70,6 +70,7 @@ Begin VB.Form frmInsert
          Left            =   180
          MaxLength       =   15
          TabIndex        =   1
+         Tag             =   "0,0000"
          Text            =   "0,0000"
          Top             =   1410
          Width           =   2055
@@ -80,6 +81,7 @@ Begin VB.Form frmInsert
          Left            =   180
          MaxLength       =   10
          TabIndex        =   3
+         Tag             =   "1,00"
          Text            =   "1,00"
          Top             =   2160
          Width           =   2055
@@ -90,6 +92,7 @@ Begin VB.Form frmInsert
          Left            =   2340
          MaxLength       =   20
          TabIndex        =   4
+         Tag             =   "0,0000"
          Text            =   "0,0000"
          Top             =   2160
          Width           =   2025
@@ -100,6 +103,7 @@ Begin VB.Form frmInsert
          Left            =   2340
          MaxLength       =   10
          TabIndex        =   2
+         Tag             =   "0,0000"
          Text            =   "0,0000"
          Top             =   1410
          Width           =   2025
@@ -110,6 +114,7 @@ Begin VB.Form frmInsert
          Left            =   180
          MaxLength       =   10
          TabIndex        =   5
+         Tag             =   "0,0000"
          Text            =   "0,0000"
          Top             =   2910
          Width           =   2025
@@ -120,6 +125,7 @@ Begin VB.Form frmInsert
          Left            =   2340
          MaxLength       =   10
          TabIndex        =   6
+         Tag             =   "0,0000"
          Text            =   "0,0000"
          Top             =   2910
          Width           =   2025
@@ -357,6 +363,7 @@ Private Sub btnSair_Click()
 End Sub
 
 Private Sub Form_Load()
+  Set MaskedEdit = New clsMaskedEdit
   MaskedEdit.Format txtQuantidade, "MOEDA", 2
   MaskedEdit.Format txtPrecoCompra, "MOEDA", 4
   MaskedEdit.Format txtPrecoVenda, "MOEDA", 4
@@ -407,7 +414,7 @@ End Sub
 
 Private Sub TxtPrecoCompra_LostFocus()
   If Len(txtPrecoCompra.Text) = 0 Then
-    txtPrecoCompra.Text = 0
+    txtPrecoCompra.Text = txtPrecoCompra.Tag
   End If
   '
   txtPrecoCompra.Text = Format$(txtPrecoCompra.Text, "#,##0.0000")
@@ -425,7 +432,7 @@ End Sub
 
 Private Sub TxtPrecoVenda_LostFocus()
   If Len(txtPrecoVenda.Text) = 0 Then
-    txtPrecoVenda.Text = 0
+    txtPrecoVenda.Text = txtPrecoVenda.Tag
   End If
   '
   txtPrecoVenda.Text = Format$(txtPrecoVenda.Text, "#,##0.0000")
@@ -452,7 +459,7 @@ Private Sub TxtQuantidade_LostFocus()
   Dim TotalPagar As Currency
   '
   If Len(txtQuantidade.Text) = 0 Then
-    txtQuantidade.Text = 1
+    txtQuantidade.Text = txtQuantidade.Tag
   End If
   '
   txtQuantidade.Text = Format$(txtQuantidade.Text, "#,##0.00")
@@ -472,7 +479,7 @@ End Sub
 
 Private Sub TxtTotalPago_LostFocus()
   If Len(txtTotalPago.Text) = 0 Then
-    txtTotalPago.Text = 0
+    txtTotalPago.Text = txtTotalPago.Tag
   End If
   '
   txtTotalPago.Text = Format$(txtTotalPago.Text, "#,##0.0000")
@@ -490,7 +497,7 @@ End Sub
 
 Private Sub TxtPrecoTabela_LostFocus()
   If Len(txtPrecoTabela.Text) = 0 Then
-    txtPrecoTabela.Text = 0
+    txtPrecoTabela.Text = txtPrecoTabela.Tag
   End If
   '
   txtPrecoTabela.Text = Format$(txtPrecoTabela.Text, "#,##0.0000")
@@ -508,7 +515,7 @@ End Sub
 
 Private Sub TxtUltimoPreco_LostFocus()
   If Len(txtUltimoPreco.Text) = 0 Then
-    txtUltimoPreco.Text = 0
+    txtUltimoPreco.Text = txtUltimoPreco.Tag
   End If
   '
   txtUltimoPreco.Text = Format$(txtUltimoPreco.Text, "#,##0.0000")
