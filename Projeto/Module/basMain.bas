@@ -30,7 +30,7 @@ Attribute VB_Name = "basMain"
 Option Explicit 'FORÇA DECLARAÇÃO DO TIPO DA VARIÁVEL
 
 Public Sub Main()
-  frmProduto.Show vbModal
+  frmMain.Show
 End Sub
 
 '--------------------------------------------------------------------------------

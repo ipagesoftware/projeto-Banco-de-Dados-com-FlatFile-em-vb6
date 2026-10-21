@@ -1,5 +1,6 @@
 VERSION 5.00
 Begin VB.Form frmMain 
+   AutoRedraw      =   -1  'True
    Caption         =   "Exemplo de CRUD com arquivo texto"
    ClientHeight    =   6330
    ClientLeft      =   60
@@ -19,7 +20,7 @@ Begin VB.Form frmMain
    LockControls    =   -1  'True
    ScaleHeight     =   6330
    ScaleWidth      =   9060
-   WindowState     =   2  'Maximized
+   StartUpPosition =   2  'CenterScreen
    Begin VB.Image imgBackGround 
       Height          =   5655
       Left            =   360
