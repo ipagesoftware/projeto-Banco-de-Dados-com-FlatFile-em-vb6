@@ -135,7 +135,7 @@ End Sub
 Private Sub imgBackGround_MouseDown(Button As Integer, _
                                     Shift As Integer, _
                                     X As Single, _
-                                    Y As Single)
+                                    y As Single)
   If Button = 2 Then
     'AO CLICAR COM O BOTÃO DIREITO DO MOUSE O
     'MENU PRINCIPAL SERÁ EXIBIDO
@@ -191,13 +191,12 @@ End Sub
 
 Private Sub mnuWhatsApp_Click()
   Dim URL      As String
-  Dim Fone     As String
-  Dim Mensagem As String
-  '
+  '"https://api.whatsapp.com/send?phone=5581986352819&text=Ol%C3%A1%20tudo%20bem%3F%0D%0A%0D%0AGostaria%20que%20voc%C3%AA%20me%20ajudasse%20a%20fazer%20um%20or%C3%A7amento.%0D%0A%0D%0ADesde%20j%C3%A1%20agrade%C3%A7o%20a%20aten%C3%A7%C3%A3o%20e%20fico%20no%20aguardo%20do%20seu%20pronunciamento.%0D%0A%0D%0ANOTA%3A%0D%0ASolicita%C3%A7%C3%A3o%20realizada%20atrav%C3%A9s%20do%20nosso%20WEBSITE%20em%3A%2007%2F04%2F2025%2023%3A13%3A47" target="_blank"><i class="fa fa-whatsapp"></i> <?= FONES[1] ?>
+                                            
   URL = "https://api.whatsapp.com/send"
-  Fone = "?phone=+5581986152352"
-  Mensagem = "&text=Olá, gostaria de esclarecer algumas dúvidas sobre o "
-  Mensagem = Mensagem & "aplicativo FlatFile em Visual Basic 6.0."
+  URL = URL & "?phone=+5581986152352"
+  URL = URL & "&text=Olá, gostaria de esclarecer algumas dúvidas sobre o "
+  URL = URL & "aplicativo FlatFile em Visual Basic 6.0."
   '
   Call ShellExecute(0, "open", URL, vbNullString, vbNullString, 1)
 End Sub

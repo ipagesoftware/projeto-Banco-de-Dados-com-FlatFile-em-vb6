@@ -18,6 +18,8 @@ Begin VB.Form frmNone
    EndProperty
    LinkTopic       =   "Form1"
    LockControls    =   -1  'True
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
    ScaleHeight     =   3135
    ScaleWidth      =   5715
    ShowInTaskbar   =   0   'False

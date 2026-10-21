@@ -1,0 +1,6 @@
+VBGROUP 5.0
+StartupProject=BorderStyle\BorderStyle.vbp
+Project=ContaBancaria\ContaBancaria.vbp
+Project=Funcoes\Funcoes.vbp
+Project=NomeComputador\NomeComputador.vbp
+Project=SubRotina\SubRotina.vbp

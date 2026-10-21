@@ -43,15 +43,6 @@ Public Type TProduto
   Ultimo      As String * 10
 End Type
 
-' Declaração da estrutura (tipo de dado customizado)
-Public Type Cliente
-  Codigo As Long
-  Nome As String * 50       ' String de tamanho fixo
-  CPF As String * 11
-  ValorLimite As Double
-  Ativo As Boolean
-End Type
-
 '
 Public dataBaseProduto As String
 
@@ -83,7 +74,7 @@ Public Function Duplicidade(ByVal Codigo As String, _
   Duplicidade = True 'VALOR PADRÃO DoEven RETORNO DA FUNCÇÃO
   '
   Buffer = FreeFile
-  nomeProduto = UCase(Trim(nomeProduto))
+  nomeProduto = UCase$(Trim$(nomeProduto))
   ' VERIFICA SE O NOME DO ARQUIVO DE TEXTO PARA O BANCO DE DADOS FOI DEFINIDO
   If Len(dataBaseProduto) = 0 Then
     dataBaseProduto = App.Path & "\database\produtos.dat"
@@ -96,10 +87,10 @@ Public Function Duplicidade(ByVal Codigo As String, _
   For RecordSet = 1 To TotalRegistros
     Get #Buffer, RecordSet, Produto
     '
-    If Val(Produto.Codigo) <> Val(Codigo) And UCase(Trim(Produto.Nome)) = nomeProduto Then
+    If Val(Produto.Codigo) <> Val(Codigo) And UCase$(Trim$(Produto.Nome)) = nomeProduto Then
       Screen.MousePointer = vbDefault
       MsgBox "O Nome do Produto: " & nomeProduto & ",  já encontra-se cadastrado para o código: " & Produto.Codigo & "." & vbCrLf & vbCrLf & "Tente outro valor!", vbExclamation Or vbOKOnly, "Atenção"
-      frmEdit.TxtNome.SetFocus
+      frmEdit.txtNome.SetFocus
       Duplicidade = False
       Exit For
     End If
@@ -288,7 +279,7 @@ Public Function Incluir(ByRef Produto As TProduto) As Long
   '
   On Error GoTo LogErrorHandler 'ATIVA O TRATAMENTO DE ERROS
   '
-  Produto.Codigo = Format(basProduto.UltimoRegistro, "00000")
+  Produto.Codigo = Format$(basProduto.UltimoRegistro, "00000")
   '
   Incluir = 0 'VALOR PADRÃO DoEvent RETORNO DA FUNÇÃO
   ' VERIFICA SE O NOME DO ARQUIVO DE TEXTO PARA O BANCO DE DADOS FOI DEFINIDO
@@ -356,10 +347,10 @@ Public Function Pesquisar(ByVal nomeProduto As String) As Boolean
   For RecordSet = 1 To TotalRegistros
     Get #Buffer, RecordSet, Produto
     '
-    If UCase(Trim(Produto.Nome)) = UCase(Trim(nomeProduto)) Then
+    If UCase$(Trim$(Produto.Nome)) = UCase$(Trim$(nomeProduto)) Then
       Screen.MousePointer = vbDefault
       MsgBox "O Nome do Produto: " & nomeProduto & ",  já encontra-se cadastrado para o código: " & Produto.Codigo & "." & vbCrLf & vbCrLf & "Tente outro valor!", vbExclamation Or vbOKOnly, "Atenção"
-      frmInsert.TxtNome.SetFocus
+      frmInsert.txtNome.SetFocus
       Pesquisar = False
       Exit Function
     End If

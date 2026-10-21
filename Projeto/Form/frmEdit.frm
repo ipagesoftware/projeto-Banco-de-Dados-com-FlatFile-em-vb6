@@ -87,7 +87,7 @@ Begin VB.Form frmEdit
       TabIndex        =   9
       Top             =   1170
       Width           =   6555
-      Begin VB.TextBox TxtUltimoPreco 
+      Begin VB.TextBox txtUltimoPreco 
          Alignment       =   1  'Right Justify
          Height          =   375
          Left            =   2340
@@ -97,7 +97,7 @@ Begin VB.Form frmEdit
          Top             =   2940
          Width           =   2025
       End
-      Begin VB.TextBox TxtPrecoTabela 
+      Begin VB.TextBox txtPrecoTabela 
          Alignment       =   1  'Right Justify
          Height          =   375
          Left            =   180
@@ -107,7 +107,7 @@ Begin VB.Form frmEdit
          Top             =   2940
          Width           =   2025
       End
-      Begin VB.TextBox TxtPrecoVenda 
+      Begin VB.TextBox txtPrecoVenda 
          Alignment       =   1  'Right Justify
          Height          =   375
          Left            =   2340
@@ -117,7 +117,7 @@ Begin VB.Form frmEdit
          Top             =   1440
          Width           =   2025
       End
-      Begin VB.TextBox TxtTotalPago 
+      Begin VB.TextBox txtTotalPago 
          Alignment       =   1  'Right Justify
          Height          =   375
          Left            =   2340
@@ -127,7 +127,7 @@ Begin VB.Form frmEdit
          Top             =   2190
          Width           =   2025
       End
-      Begin VB.TextBox TxtQuantidade 
+      Begin VB.TextBox txtQuantidade 
          Alignment       =   1  'Right Justify
          Height          =   375
          Left            =   180
@@ -137,7 +137,7 @@ Begin VB.Form frmEdit
          Top             =   2190
          Width           =   2055
       End
-      Begin VB.TextBox TxtPrecoCompra 
+      Begin VB.TextBox txtPrecoCompra 
          Alignment       =   1  'Right Justify
          Height          =   375
          Left            =   180
@@ -147,7 +147,7 @@ Begin VB.Form frmEdit
          Top             =   1440
          Width           =   2055
       End
-      Begin VB.TextBox TxtNome 
+      Begin VB.TextBox txtNome 
          Height          =   375
          Left            =   1710
          MaxLength       =   20
@@ -155,7 +155,7 @@ Begin VB.Form frmEdit
          Top             =   630
          Width           =   4680
       End
-      Begin VB.TextBox TxtCodigo 
+      Begin VB.TextBox txtCodigo 
          Enabled         =   0   'False
          Height          =   375
          Left            =   180
@@ -325,7 +325,6 @@ Attribute VB_Exposed = False
 '
 '
 Option Explicit 'FORÇA DECLARAÇÃO DO TIPO DA VARIÁVEL
-Private cMask      As New clsMaskEdit
 Private mDados     As String
 Private mRecordSet As Long
 
@@ -337,20 +336,20 @@ Private Sub btnSalvar_Click()
   Dim Produto As TProduto
   '
   If MsgBox("Confirma os dados digitados?", vbQuestion Or vbYesNo Or vbDefaultButton2, "Atenção") = vbNo Then
-    TxtNome.SetFocus
+    txtNome.SetFocus
     Exit Sub
   End If
   '-------------------------------------------------------------------
   'PASSA OS DADOS DAS CAIXAS DE TEXTO A VARIÁVEL GLOBAL DO TIPO TYPE
   '-------------------------------------------------------------------
-  Produto.Nome = TxtNome.Text
-  Produto.Codigo = TxtCodigo.Text
-  Produto.PrecoCompra = TxtPrecoCompra.Text
-  Produto.PrecoVenda = TxtPrecoVenda.Text
-  Produto.Quantidade = TxtQuantidade.Text
-  Produto.TotalPago = TxtTotalPago.Text
-  Produto.Tabela = TxtPrecoTabela.Text
-  Produto.Ultimo = TxtUltimoPreco.Text
+  Produto.Nome = txtNome.Text
+  Produto.Codigo = txtCodigo.Text
+  Produto.PrecoCompra = txtPrecoCompra.Text
+  Produto.PrecoVenda = txtPrecoVenda.Text
+  Produto.Quantidade = txtQuantidade.Text
+  Produto.TotalPago = txtTotalPago.Text
+  Produto.Tabela = txtPrecoTabela.Text
+  Produto.Ultimo = txtUltimoPreco.Text
   '
   Result = basProduto.Duplicidade(Produto.Codigo, Produto.Nome)
   '
@@ -364,7 +363,7 @@ Private Sub btnSalvar_Click()
       Exit Sub
     Else
       MsgBox "Ocorreu uma exceção ao editar os dados atuais, por gentiliza verifique!", vbCritical, "Atenção"
-      TxtNome.SetFocus
+      txtNome.SetFocus
     End If
   End If
 End Sub
@@ -373,12 +372,8 @@ Private Sub btnSair_Click()
   Unload Me
 End Sub
 
-Private Sub Form_Initialize()
-  Set cMask = New clsMaskEdit
-End Sub
-
 Private Sub Form_Load()
-  If Len(Trim(Dados)) Then
+  If Len(Trim$(Dados)) Then
     '---------------------
     ' DEFINIÇÃO VARIÁVEIS
     '---------------------
@@ -386,19 +381,26 @@ Private Sub Form_Load()
     '
     Valores = Split(Dados, "|")
     '
-    TxtNome.Text = Valores(0)
-    TxtCodigo.Text = Valores(1)
-    TxtPrecoCompra.Text = Valores(2)
-    TxtPrecoVenda.Text = Valores(3)
-    TxtQuantidade.Text = Valores(4)
-    TxtPrecoTabela.Text = Valores(5)
-    TxtTotalPago.Text = Valores(6)
-    TxtUltimoPreco.Text = Valores(7)
+    txtNome.Text = Valores(0)
+    txtCodigo.Text = Valores(1)
+    txtPrecoCompra.Text = Valores(2)
+    txtPrecoVenda.Text = Valores(3)
+    txtQuantidade.Text = Valores(4)
+    txtPrecoTabela.Text = Valores(5)
+    txtTotalPago.Text = Valores(6)
+    txtUltimoPreco.Text = Valores(7)
   End If
+  '
+  MaskedEdit.Format txtQuantidade, "MOEDA", 2
+  MaskedEdit.Format txtPrecoCompra, "MOEDA", 4
+  MaskedEdit.Format txtPrecoVenda, "MOEDA", 4
+  MaskedEdit.Format txtPrecoTabela, "MOEDA", 4
+  MaskedEdit.Format txtUltimoPreco, "MOEDA", 4
+  MaskedEdit.Format txtTotalPago, "MOEDA", 4
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-  Set cMask = Nothing
+  MaskedEdit.ReleaseForm Me
 End Sub
 
 Private Sub mnuSair_Click()
@@ -410,129 +412,107 @@ Private Sub mnuSalvar_Click()
 End Sub
 
 Private Sub TxtCodigo_GotFocus()
-  cMask.SelText TxtCodigo, 0, Len(TxtCodigo.Text)
+  MaskedEdit.SelText txtCodigo, 0, Len(txtCodigo.Text)
 End Sub
 
 Private Sub TxtCodigo_KeyDown(KeyCode As Integer, Shift As Integer)
   If KeyCode = vbKeyReturn Then
-    TxtNome.SetFocus
+    txtNome.SetFocus
   End If
-End Sub
-
-Private Sub TxtCodigo_KeyPress(KeyAscii As Integer)
-  cMask.Mask TxtCodigo, KeyAscii, "C"
 End Sub
 
 Private Sub TxtCodigo_LostFocus()
-  If Len(TxtCodigo.Text) = 0 Then
-    TxtCodigo.Text = 0
+  If Len(txtCodigo.Text) = 0 Then
+    txtCodigo.Text = 0
   End If
   '
-  TxtCodigo.Text = Format(TxtCodigo.Text, "00000")
+  txtCodigo.Text = Format$(txtCodigo.Text, "00000")
 End Sub
 
 Private Sub TxtNome_GotFocus()
-  cMask.SelText TxtNome, 0, Len(TxtNome.Text)
+  MaskedEdit.SelText txtNome, 0, Len(txtNome.Text)
 End Sub
 
 Private Sub TxtNome_KeyDown(KeyCode As Integer, Shift As Integer)
   If KeyCode = vbKeyReturn Then
-    TxtPrecoCompra.SetFocus
+    txtPrecoCompra.SetFocus
   End If
 End Sub
 
-Private Sub TxtNome_KeyPress(KeyAscii As Integer)
-  cMask.Mask TxtNome, KeyAscii, "U"
-End Sub
-
 Private Sub TxtNome_LostFocus()
-  If Len(TxtNome.Text) = 0 Then
-    TxtNome.Text = "INDEFINIDO"
+  If Len(txtNome.Text) = 0 Then
+    txtNome.Text = "INDEFINIDO"
+  Else
+    txtNome.Text = UCase$(txtNome.Text)
   End If
 End Sub
 
 Private Sub TxtPrecoCompra_GotFocus()
-  cMask.SelText TxtPrecoCompra, 0, Len(TxtPrecoCompra.Text)
+  MaskedEdit.SelText txtPrecoCompra, 0, Len(txtPrecoCompra.Text)
 End Sub
 
 Private Sub TxtPrecoCompra_KeyDown(KeyCode As Integer, Shift As Integer)
   If KeyCode = vbKeyReturn Then
-    TxtPrecoVenda.SetFocus
+    txtPrecoVenda.SetFocus
   End If
-End Sub
-
-Private Sub TxtPrecoCompra_KeyPress(KeyAscii As Integer)
-  cMask.Mask TxtPrecoCompra, KeyAscii, "C", "0,0000"
 End Sub
 
 Private Sub TxtPrecoCompra_LostFocus()
-  If Len(TxtPrecoCompra.Text) = 0 Then
-    TxtPrecoCompra.Text = 0
+  If Len(txtPrecoCompra.Text) = 0 Then
+    txtPrecoCompra.Text = 0
   End If
   '
-  TxtPrecoCompra.Text = Format(TxtPrecoCompra.Text, "#,##0.0000")
+  txtPrecoCompra.Text = Format$(txtPrecoCompra.Text, "#,##0.0000")
 End Sub
 
 Private Sub TxtPrecoTabela_GotFocus()
-  cMask.SelText TxtPrecoTabela, 0, Len(TxtPrecoTabela.Text)
+  MaskedEdit.SelText txtPrecoTabela, 0, Len(txtPrecoTabela.Text)
 End Sub
 
 Private Sub TxtPrecoTabela_KeyDown(KeyCode As Integer, Shift As Integer)
   If KeyCode = vbKeyReturn Then
-    TxtUltimoPreco.SetFocus
+    txtUltimoPreco.SetFocus
   End If
-End Sub
-
-Private Sub TxtPrecoTabela_KeyPress(KeyAscii As Integer)
-  cMask.Mask TxtPrecoTabela, KeyAscii, "C"
 End Sub
 
 Private Sub TxtPrecoTabela_LostFocus()
-  If Len(TxtPrecoTabela.Text) = 0 Then
-    TxtPrecoTabela.Text = 0
+  If Len(txtPrecoTabela.Text) = 0 Then
+    txtPrecoTabela.Text = 0
   End If
   '
-  TxtPrecoTabela.Text = Format(TxtPrecoTabela.Text, "#,##0.0000")
+  txtPrecoTabela.Text = Format$(txtPrecoTabela.Text, "#,##0.0000")
 End Sub
 
 Private Sub TxtPrecoVenda_GotFocus()
-  cMask.SelText TxtPrecoVenda, 0, Len(TxtPrecoVenda.Text)
+  MaskedEdit.SelText txtPrecoVenda, 0, Len(txtPrecoVenda.Text)
 End Sub
 
 Private Sub TxtPrecoVenda_KeyDown(KeyCode As Integer, Shift As Integer)
   If KeyCode = vbKeyReturn Then
-    TxtQuantidade.SetFocus
+    txtQuantidade.SetFocus
   End If
-End Sub
-
-Private Sub TxtPrecoVenda_KeyPress(KeyAscii As Integer)
-  cMask.Mask TxtPrecoVenda, KeyAscii, "C"
 End Sub
 
 Private Sub TxtPrecoVenda_LostFocus()
-  If Len(TxtPrecoVenda.Text) = 0 Then
-    TxtPrecoVenda.Text = 0
+  If Len(txtPrecoVenda.Text) = 0 Then
+    txtPrecoVenda.Text = 0
   End If
   '
-  TxtPrecoVenda.Text = Format(TxtPrecoVenda.Text, "#,##0.0000")
+  txtPrecoVenda.Text = Format$(txtPrecoVenda.Text, "#,##0.0000")
   '
-  If CCur(TxtUltimoPreco.Text) = 0 Then
-    TxtUltimoPreco.Text = TxtPrecoCompra.Text
+  If CCur(txtUltimoPreco.Text) = 0 Then
+    txtUltimoPreco.Text = txtPrecoCompra.Text
   End If
 End Sub
 
 Private Sub TxtQuantidade_GotFocus()
-  cMask.SelText TxtQuantidade, 0, Len(TxtQuantidade.Text)
+  MaskedEdit.SelText txtQuantidade, 0, Len(txtQuantidade.Text)
 End Sub
 
 Private Sub TxtQuantidade_KeyDown(KeyCode As Integer, Shift As Integer)
   If KeyCode = vbKeyReturn Then
-    TxtTotalPago.SetFocus
+    txtTotalPago.SetFocus
   End If
-End Sub
-
-Private Sub TxtQuantidade_KeyPress(KeyAscii As Integer)
-  cMask.Mask TxtQuantidade, KeyAscii, "C"
 End Sub
 
 Private Sub TxtQuantidade_LostFocus()
@@ -541,39 +521,35 @@ Private Sub TxtQuantidade_LostFocus()
   '---------------------
   Dim TotalPagar As Currency
   '
-  If Len(TxtQuantidade.Text) = 0 Then
-    TxtQuantidade.Text = 1
+  If Len(txtQuantidade.Text) = 0 Then
+    txtQuantidade.Text = 1
   End If
   '
-  TxtQuantidade.Text = Format(TxtQuantidade.Text, "#,##0.00")
-  TotalPagar = CCur(TxtPrecoCompra.Text) * CCur(TxtQuantidade.Text)
-  TxtTotalPago.Text = Format(TotalPagar, "#,##0.0000")
+  txtQuantidade.Text = Format$(txtQuantidade.Text, "#,##0.00")
+  TotalPagar = CCur(txtPrecoCompra.Text) * CCur(txtQuantidade.Text)
+  txtTotalPago.Text = Format$(TotalPagar, "#,##0.0000")
 End Sub
 
 Private Sub TxtTotalPago_GotFocus()
-  cMask.SelText TxtTotalPago, 0, Len(TxtTotalPago.Text)
+  MaskedEdit.SelText txtTotalPago, 0, Len(txtTotalPago.Text)
 End Sub
 
 Private Sub TxtTotalPago_KeyDown(KeyCode As Integer, Shift As Integer)
   If KeyCode = vbKeyReturn Then
-    TxtPrecoTabela.SetFocus
+    txtPrecoTabela.SetFocus
   End If
-End Sub
-
-Private Sub TxtTotalPago_KeyPress(KeyAscii As Integer)
-  cMask.Mask TxtTotalPago, KeyAscii, "C"
 End Sub
 
 Private Sub TxtTotalPago_LostFocus()
-  If Len(TxtTotalPago.Text) = 0 Then
-    TxtTotalPago.Text = 0
+  If Len(txtTotalPago.Text) = 0 Then
+    txtTotalPago.Text = 0
   End If
   '
-  TxtTotalPago.Text = Format(TxtTotalPago.Text, "#,##0.0000")
+  txtTotalPago.Text = Format$(txtTotalPago.Text, "#,##0.0000")
 End Sub
 
 Private Sub TxtUltimoPreco_GotFocus()
-  cMask.SelText TxtUltimoPreco, 0, Len(TxtUltimoPreco.Text)
+  MaskedEdit.SelText txtUltimoPreco, 0, Len(txtUltimoPreco.Text)
 End Sub
 
 Private Sub TxtUltimoPreco_KeyDown(KeyCode As Integer, Shift As Integer)
@@ -582,16 +558,12 @@ Private Sub TxtUltimoPreco_KeyDown(KeyCode As Integer, Shift As Integer)
   End If
 End Sub
 
-Private Sub TxtUltimoPreco_KeyPress(KeyAscii As Integer)
-  cMask.Mask TxtUltimoPreco, KeyAscii, "C"
-End Sub
-
 Private Sub TxtUltimoPreco_LostFocus()
-  If Len(TxtUltimoPreco.Text) = 0 Then
-    TxtUltimoPreco.Text = 0
+  If Len(txtUltimoPreco.Text) = 0 Then
+    txtUltimoPreco.Text = 0
   End If
   '
-  TxtUltimoPreco.Text = Format(TxtUltimoPreco.Text, "#,##0.0000")
+  txtUltimoPreco.Text = Format$(txtUltimoPreco.Text, "#,##0.0000")
 End Sub
 
 Public Property Get RecordSet() As String

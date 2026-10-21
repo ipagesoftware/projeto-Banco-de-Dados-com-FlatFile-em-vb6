@@ -1,3 +1,15 @@
+Option Explicit
+'==============================================================================
+' clsMaskedEdit - gerenciador de mascaras para TextBox (sem usar o MaskEdBox).
+' Use a instancia global declarada em modMask.bas:  MaskedEdit
+'
+'   MaskedEdit.Format txtCPF, "CPF"
+'   MaskedEdit.Format txtX, "999.999.999-99"
+'
+' Formatos prontos: CPF, CNPJ, CPFCNPJ, CEP, TELEFONE, DATA, DATAHORA, HORA,
+'                   NUMERO, MOEDA, MOEDA:3 (casas decimais)
+'==============================================================================
+
 VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
@@ -6,399 +18,410 @@ BEGIN
   DataSourceBehavior  = 0  'vbNone
   MTSTransactionMode  = 0  'NotAnMTSObject
 END
-Attribute VB_Name = "clsMaskEdit"
+Attribute VB_Name = "clsMaskItem"
 Attribute VB_GlobalNameSpace = False
-Attribute VB_Creatable = True
+Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+Option Explicit
+'==============================================================================
+' clsMaskItem - uma instancia por TextBox (criada pela clsMaskedEdit).
 '
-'                    ########\ ########\ ########\
-'                    ##  _____|\__##  __|##  _____|
-'                    ## |         ## |   ## |
-'                    #####\       ## |   #####\
-'                    ##  __|      ## |   ##  __|
-'                    ## |         ## |   ## |
-'                    ########\    ## |   ########\
-'                    \________|   \__|   \________|
+' Caracteres da mascara:
+'   9 ou #  = digito (0-9)
+'   A       = letra (A-Z, convertida para maiuscula)
+'   X       = letra ou digito (letra convertida para maiuscula)
+'   *       = qualquer caractere
+'   outros  = literais (inseridos automaticamente)
 '
-'
-' ____  ____   ___  __   __     __     ____  ____  ___  __ _  __  ___   __
-'(  __)/ ___) / __)/  \ (  )   / _\   (_  _)(  __)/ __)(  ( \(  )/ __) / _\
-' ) _) \___ \( (__(  O )/ (_/\/    \    )(   ) _)( (__ /    / )(( (__ /    \
-'(____)(____/ \___)\__/ \____/\_/\_/   (__) (____)\___)\_)__)(__)\___)\_/\_/
-'               ____  ____  ____  __   ____  _  _   __   __
-'              (  __)/ ___)(_  _)/ _\ (    \/ )( \ / _\ (  )
-'               ) _) \___ \  )( /    \ ) D () \/ (/    \/ (_/\
-'              (____)(____/ (__)\_/\_/(____/\____/\_/\_/\____/
-'        ___  __  ___  ____  ____   __     ____  __   __   ____
-'       / __)(  )/ __)(  __)(  _ \ /  \   (    \(  ) / _\ / ___)
-'      ( (__  )(( (__  ) _)  )   /(  O )   ) D ( )( /    \\___ \
-'       \___)(__)\___)(____)(__\_) \__/   (____/(__)\_/\_/(____/
-'
-' © Copyright Ipage Software - Diógenes Dias - 1995/2026
-' Visite meu github: https://github.com/ipagesoftware
-'
-'
-Option Explicit 'FORÇA DECLARAÇÃO DO TIPO DA VARIÁVEL
-'
-Public Enum eFormatText
-  'U = Ucase, L = Lcase, P = ProperCase, D = Data, C = Currency, E = Email
-  emUCase = 0
-  emLCase = 1
-  emProperCase = 2
-  emData = 3
-  emCurrency = 4
-  emEmail = 5
-  emCheck = 6
-  emInput = 7
-  emOBS = 8
-  emNone = -1
-End Enum
-'
-'/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
-'> Nome                  : Mask                                           <
-'> Data/Hora             : 29/10/2006 11:35                               <
-'> Autor                 : Diógenes Dias                                  <
-'> Descrição             : <
-'> Parâmetros Passados   : <
-'> Parâmetros Retornados : <
-'> Dependências          :                                                <
-'> Categoria             :                                                <
-'> Modificada em         : 29/10/2006 11:35                               <
-'>                                                                        <
-'> © Copyright DIÓGENES DIAS
-'>                                                                        <
-'\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-'
-Public Sub Mask(ByRef p_Ctrl As Object, _
-                ByRef p_KeyAscii As Integer, _
-                Optional ByVal M_FormatText As String, _
-                Optional ByVal p_Mask As String = "")
+' Mascaras alternativas: separe com "|" em ordem CRESCENTE de tamanho.
+'   Ex.: "(99) 9999-9999|(99) 99999-9999"
+'==============================================================================
 
-  On Error GoTo LogErrorHandler 'ATIVA O TRATAMENTO DE ERROS
-  '
-  'U = Ucase, L = Lcase, P = ProperCase, D = Data, C = Currency
-  '
-  '---------------------
-  ' DEFINIÇÃO VARIÁVEIS
-  '---------------------
-  Const m_F = "UuLuPpDdCc"
-  Const ONLY_WORD = "0123456789"
-  Dim Valid_CHAR     As String
-  Dim Flag_Format    As Integer
-  Dim CHAR1          As String
-  Dim CHAR2          As String
-  Dim L              As Integer
-  Dim Tmp            As String
-  Dim mFormatData    As String
-  Dim FormatCurrency As String
-  Dim Slash          As Variant
-  Dim Slash2         As Variant
-  Dim m_Decimal      As Integer
-  '
-  Valid_CHAR = "abcdefghijklmnopqrstuwxyz_.@0123456789-" & Chr$(8) & Chr$(3) & Chr$(22) & Chr$(24) & Chr$(26) & Chr$(13) & Chr$(10)
-  '
-  '/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
-  '> Habilita as teclas de atalho <
-  '/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
-  '
-  Select Case p_KeyAscii
-    Case 3, 22, 24, 26
-      'Permite Ctrl+C, Ctrl+V e Ctrl+X
-      Exit Sub
-    Case vbKeyReturn
-      'SendKeys "{TAB}"
-      Exit Sub
-  End Select
-  '
-Begin:
-  '
-  L = Len(p_Mask)
-  '
-  Flag_Format = InStr(1, m_F, M_FormatText, vbTextCompare)
-  '
-  If Flag_Format > 0 Or Len(Flag_Format) < Len(m_F) Then
-    '
-    Select Case UCase(Mid(M_FormatText, 1, 1))
-      Case "C"
-        If Len(Trim(p_Mask)) = False Then
-          FormatCurrency = ""
-          Slash = ","
-          Slash2 = "."
-        Else
-          If InStr(1, p_Mask, ".", vbTextCompare) <> 0 Then
-            m_Decimal = InStr(1, p_Mask, ".", vbTextCompare) - 1
-            FormatCurrency = Mid(p_Mask, 1, m_Decimal) + Mid(p_Mask, m_Decimal + 2)
-            Slash = ","
-            Slash2 = "."
-          ElseIf InStr(1, p_Mask, ".", vbTextCompare) <> 0 Then
-            m_Decimal = InStr(1, p_Mask, ".", vbTextCompare) - 1
-            FormatCurrency = Mid(p_Mask, 1, m_Decimal) + Mid(p_Mask, m_Decimal + 2)
-            Slash = ","
-            Slash2 = "."
-          Else
-            FormatCurrency = ""
-            Slash = ","
-            Slash2 = "."
-          End If
-          '
-          Tmp = p_Ctrl.Text
-          '
-          If InStr(1, Tmp, FormatCurrency, vbTextCompare) = False Then
-            Tmp = FormatCurrency & " " & Tmp
-            p_Ctrl.Text = Tmp
-            p_Ctrl.SelStart = Len(Tmp)
-          End If
-        End If
-        '
-        'Currency
-        '*** Permite só números com máscara para Moeda ***
-        '
-        Select Case p_KeyAscii
-          Case 3, 22, 24, 26
-            'Permite Ctrl+C, Ctrl+V e Ctrl+X
-            Exit Sub
-          Case 8
-            Exit Sub
-          Case Asc(Slash2)
-            '*** Evita a repetição da vírgula ***
-            If InStr(p_Ctrl, Slash) <> 0 Then
-              p_KeyAscii = 0
-              Exit Sub
-            End If
-            '
-            p_KeyAscii = Asc(Slash)
-          Case Asc(Slash)
-            '*** Evita a repetição da vírgula ***
-            If InStr(p_Ctrl, Slash) <> 0 Then
-              p_KeyAscii = 0
-            End If
-          Case 48 To 57, Asc(Slash)
-          Case Asc("-")
-            '*** Evita a repetição do sinal de menos ***
-            If InStr(p_Ctrl, "-") <> 0 Then
-              p_KeyAscii = 0
-              Exit Sub
-            End If
-            '
-          Case Else
-            p_KeyAscii = 0
-        End Select
-        '
-        Exit Sub
-        '
-      Case "D"
-        If Len(Trim(p_Mask)) = False Then
-          mFormatData = "DD/MM/YYYY"
-          p_Mask = "99/99/9999"
-          Slash = Split(p_Mask, "/", , vbTextCompare)
-        Else
-          '
-          If InStr(1, p_Mask, "-", vbTextCompare) <> 0 Then
-            Slash = Split(p_Mask, "-", , vbTextCompare)
-            mFormatData = "YYYY-MM-DD"    'Formato do MYSQL
-          ElseIf InStr(1, p_Mask, "/", vbTextCompare) <> 0 Then
-            Slash = Split(p_Mask, "/", , vbTextCompare)
-            mFormatData = "MM/DD/YYYY"    'Formato americano
-          End If
-          '
-          If UBound(Slash) < 2 Then
-            Slash = Split("99/99/9999", "/", , vbTextCompare)
-          End If
-          '
-        End If
-        '
-        '*** Permite só números com máscara para data ***
-        '
-        Select Case p_KeyAscii
-          Case vbKeyReturn
-            p_KeyAscii = 0
-            p_Ctrl.Text = Format(p_Ctrl.Text, mFormatData)
-          Case 8
-            Exit Sub
-          Case Asc("/")
-            Exit Sub
-          Case 3, 22, 24, 26
-            'Permite Ctrl+C, Ctrl+V e Ctrl+X
-            Exit Sub
-          Case 48 To 57
-            If Len(p_Ctrl.Text) = Len(Slash(0)) Then
-              p_Ctrl.Text = p_Ctrl.Text & "/"
-              p_Ctrl.SelStart = Len(p_Ctrl.Text)
-            ElseIf Len(p_Ctrl.Text) = (Len(Slash(0)) + Len(Slash(1)) + 1) Then
-              p_Ctrl.Text = p_Ctrl.Text & "/"
-              p_Ctrl.SelStart = Len(p_Ctrl.Text)
-            End If
-            '
-          Case Else
-            p_KeyAscii = 0
-        End Select
-        '
-        Exit Sub
-        '
-      Case "U"    ' maiúscula
-        p_KeyAscii = Asc(UCase(Chr(p_KeyAscii)))
-      Case "L"    ' Minúscula
-        p_KeyAscii = Asc(LCase(Chr(p_KeyAscii)))
-      Case "E"
-        p_KeyAscii = Asc(LCase(Chr(p_KeyAscii)))
-        '
-        If InStr(1, Valid_CHAR, Chr$(p_KeyAscii), vbTextCompare) = 0 Then
-          p_KeyAscii = 0
-        End If
-        '
-      Case "P"    'Nome próprio
-        Tmp = p_Ctrl.Text + Chr$(p_KeyAscii)
-        '
-        '> Não avalia os espaços <
-        '
-        If p_KeyAscii <> 32 Then
-          Tmp = ProperCase(Tmp)
-        End If
-        '
-        p_Ctrl.Text = Left(Tmp, Len(Tmp) - 1)
-        p_Ctrl.SelStart = Len(p_Ctrl)
-        p_KeyAscii = Asc(Right(Tmp, 1))
-        '
+Private Const MAXDIG As Long = 15          ' maximo de digitos no formato MOEDA
+
+Private WithEvents mTxt As VB.TextBox
+
+Private mMasks() As String                 ' mascaras alternativas
+Private mCount As Long
+Private mKind As Long                      ' 0 = mascara, 1 = numero, 2 = moeda
+Private mDecimals As Long
+Private mValidation As String              ' "", DATA, DATAHORA, HORA, CPF, CNPJ, CPFCNPJ
+Private mClear As Boolean
+Private mBusy As Boolean
+
+'------------------------------------------------------------------------------
+' Inicializacao
+'------------------------------------------------------------------------------
+Public Sub Init(ByVal txt As Object, ByVal Spec As String, ByVal ClearOnInvalid As Boolean, _
+                Optional ByVal Decimals As Long = -1)
+    Dim s As String, mask As String, p As Long, i As Long
+
+    Set mTxt = txt
+    mClear = ClearOnInvalid
+    mKind = 0
+    mValidation = ""
+    s = UCase$(Trim$(Spec))
+
+    Select Case True
+        Case s = "CPF":      mask = "999.999.999-99": mValidation = "CPF"
+        Case s = "CNPJ":     mask = "99.999.999/9999-99": mValidation = "CNPJ"
+        Case s = "CPFCNPJ":  mask = "999.999.999-99|99.999.999/9999-99": mValidation = "CPFCNPJ"
+        Case s = "CEP":      mask = "99999-999"
+        Case s = "TELEFONE": mask = "(99) 9999-9999|(99) 99999-9999"
+        Case s = "DATA":     mask = "99/99/9999": mValidation = "DATA"
+        Case s = "DATAHORA": mask = "99/99/9999 99:99": mValidation = "DATAHORA"
+        Case s = "HORA":     mask = "99:99": mValidation = "HORA"
+        Case s = "NUMERO":   mKind = 1
+        Case Left$(s, 5) = "MOEDA"
+            mKind = 2
+            mDecimals = 2
+            p = InStr(s, ":")
+            If p > 0 Then mDecimals = Val(Mid$(s, p + 1))
+            If Decimals >= 0 Then mDecimals = Decimals     ' 3o parametro tem prioridade
+            If mDecimals < 0 Then mDecimals = 0
+            If mDecimals > 6 Then mDecimals = 6
+        Case Else:           mask = Spec          ' mascara livre
     End Select
-    '
-  End If
-  '
-  '/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
-  '> Caractere pode gerar erros na consulta <
-  '/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
-  '
-  If p_KeyAscii = Asc("'") Then
-    p_KeyAscii = 0
-    Exit Sub
-  ElseIf p_KeyAscii = 8 Then    'BackSpace
-    Exit Sub
-  End If
-  '
-  '/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-  '> Não possui nenhuma formatação <
-  '/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-  '
-  If L = 0 Then
-    Exit Sub
-  End If
-  '
-  Tmp = Left(p_Ctrl.Text + Chr$(p_KeyAscii), Len(p_Mask))
-  '
-  '/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-  '> Não permite que o texto seja maior do que a máscara <
-  '/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-  '
-  If Len(Tmp) >= Len(p_Mask) Then
-    p_Ctrl.Text = Tmp
-    p_Ctrl.SelStart = Len(Tmp)
-    p_KeyAscii = 0
-    Exit Sub
-  End If
-  '
-  CHAR1 = Mid(p_Mask, Len(Tmp), 1)
-  CHAR2 = Mid(Tmp, Len(Tmp), 1)
-  '
-  Select Case UCase(CHAR1)
-    Case "9"
-      'Apenas número
-      If IsNumeric(CHAR2) = False Then
-        p_KeyAscii = 0
-      End If
-    Case "@"
-      'Apenas letras
-      If InStr(1, ONLY_WORD, UCase(Chr(p_KeyAscii)), vbTextCompare) <> 0 Then
-        p_KeyAscii = 0
-      End If
-      '
-    Case "-", "/", "(", ")", ".", "+", "*", " ", ":"
-      Tmp = p_Ctrl.Text & CHAR1
-      p_Ctrl.Text = Tmp
-      p_Ctrl.SelStart = Len(Tmp)
-      GoTo Begin
-    Case Else
-      If InStr(1, p_Mask, Chr$(p_KeyAscii), vbTextCompare) = False Then
-        p_KeyAscii = 0
-      End If
-  End Select
-  '
-  Exit Sub
-  'TRATAMENTO DE ERROS
-LogErrorHandler:
-  p_KeyAscii = 0
-  Err.Clear
-End Sub
-'
-'/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
-'> Nome                  : ProperCase                                     <
-'> Data/Hora             : 29/10/2006 21:25                               <
-'> Autor                 : Diógenes Dias                                  <
-'> Descrição             : Converte as primeiras letra dos nomes em       <
-'>                         maiúsculas menos: de, da, do, das, dos, a, e e.<
-'>                         Retira os espaços em branco excedentes entre   <
-'>                         as p_Words.                                    <
-'> Parâmetros Passados   : Uma String.                                    <
-'> Parâmetros Retornados : Uma string no formato nome próprio.            <
-'> Dependências          :                                                <
-'> Categoria             :                                                <
-'> Modificada em         : 29/10/2006 21:25                               <
-'>                                                                        <
-'> © Copyright DIÓGENES DIAS
-'>                                                                        <
-'\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-'
-Public Function ProperCase(ByVal p_Word As String) As String
-  '---------------------
-  ' DEFINIÇÃO VARIÁVEIS
-  '---------------------
-  Dim Resto As String
-  Dim Parte As String
-  Dim Posic As Byte
-  '
-  Resto = Trim$(LCase$(p_Word)) & " "
-  '
-  Do Until Resto = " "
-    Posic = InStr(1, Resto, " ")
-    Parte = Mid$(Resto, 1, Posic)
-    '
-    If Trim$(Parte) <> "e" And Trim$(Parte) <> "a" And Trim$(Parte) <> "do" And Trim$(Parte) <> "dos" And Trim$(Parte) <> "da" And Trim$(Parte) <> "das" And Trim$(Parte) <> "de" Then
-      '
-      Parte = UCase$(Left$(Parte, 1)) & Mid$(Parte, 2)
-      '
+
+    mMasks = Split(mask, "|")
+    mCount = UBound(mMasks) + 1
+
+    If mKind = 0 Then
+        ' MaxLength = tamanho da maior mascara
+        p = 0
+        For i = 0 To mCount - 1
+            If Len(mMasks(i)) > p Then p = Len(mMasks(i))
+        Next
+        mTxt.MaxLength = p
     End If
-    '
-    ProperCase = ProperCase & Parte
-    Resto = Trim$(Mid$(Resto, Posic)) & " "
-  Loop
-  '
-  ProperCase = Trim$(ProperCase)
-  '
-End Function
-'
-'/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
-'> Nome                  : SelText                                        <
-'> Data/Hora             : 29/10/2006 21:27                               <
-'> Autor                 : Diógenes Dias                                  <
-'> Descrição             : Seleciona o p_Ctrl quando entra em foco em uma <
-'>                         caixa de controle.                             <
-'> Parâmetros Passados   : O objeto p_Ctrl, a posição inicial de seleção  <
-'>                         a posição final de seleção.                    <
-'> Parâmetros Retornados : Nenhum                                         <
-'> Dependências          :                                                <
-'> Categoria             :                                                <
-'> Modificada em         : 29/10/2006 21:27                               <
-'>                                                                        <
-'> © Copyright DIÓGENES DIAS
-'>                                                                        <
-'\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-'
-Public Sub SelText(ByVal p_Ctrl As Object, _
-                   Optional ByVal p_Start As Integer = False, _
-                   Optional ByVal p_MaxLength As Integer = 255)
 
-  '
-  p_Ctrl.SelStart = p_Start
-  p_Ctrl.SelLength = p_MaxLength
-  '
+    mTxt_Change                                   ' formata o texto ja existente
 End Sub
 
+'------------------------------------------------------------------------------
+' Eventos do TextBox
+'------------------------------------------------------------------------------
+Private Sub mTxt_KeyPress(KeyAscii As Integer)
+    Dim ch As String, txt As String, st As Long
+    Dim mask As String, restante As String, t As String
+
+    If KeyAscii < 32 Then Exit Sub                ' Backspace, Enter, Tab, Ctrl+C/V/X...
+
+    ch = Chr$(KeyAscii)
+    txt = mTxt.Text
+    st = mTxt.SelStart
+
+    Select Case mKind
+        Case 1                                    ' NUMERO
+            If Not IsDigit(ch) Then KeyAscii = 0
+
+        Case 2                                    ' MOEDA
+            If Not IsDigit(ch) Then
+                KeyAscii = 0
+            ElseIf mTxt.SelLength = 0 And Len(DigitsOnly(txt)) >= MAXDIG Then
+                KeyAscii = 0
+            End If
+
+        Case Else                                 ' MASCARA
+            mask = LastMask()
+            ' o que sobra depois que a selecao (se houver) for substituida
+            restante = Strip(Left$(txt, st) & Mid$(txt, st + mTxt.SelLength + 1), mask)
+            If Len(restante) >= SlotCount(mask) Then
+                KeyAscii = 0
+            Else
+                t = SlotTypeAt(mask, Len(Strip(Left$(txt, st), mask)) + 1)
+                If Accepts(t, ch) Then
+                    If t = "A" Or t = "X" Then KeyAscii = Asc(UCase$(ch))
+                Else
+                    KeyAscii = 0
+                End If
+            End If
+    End Select
+End Sub
+
+Private Sub mTxt_Change()
+    Dim txt As String, novo As String, raw As String, mk As String
+    Dim st As Long, antes As Long
+
+    If mBusy Then Exit Sub
+    mBusy = True
+    On Error GoTo Fim
+
+    txt = mTxt.Text
+    st = mTxt.SelStart
+
+    Select Case mKind
+        Case 0
+            raw = Strip(txt, LastMask())
+            antes = Len(Strip(Left$(txt, st), LastMask()))
+            mk = PickMask(Len(raw))
+            novo = Apply(raw, mk)
+            If novo <> txt Then
+                mTxt.Text = novo
+                mTxt.SelStart = CursorPos(mk, Len(novo), antes, Len(raw))
+            End If
+
+        Case 1
+            novo = DigitsOnly(txt)
+            If novo <> txt Then
+                antes = Len(DigitsOnly(Left$(txt, st)))
+                mTxt.Text = novo
+                mTxt.SelStart = antes
+            End If
+
+        Case 2
+            novo = FormatMoney(txt)
+            If novo <> txt Then mTxt.Text = novo
+            mTxt.SelStart = Len(mTxt.Text)
+    End Select
+Fim:
+    mBusy = False
+End Sub
+
+Private Sub mTxt_LostFocus()
+    If mClear Then
+        If mTxt.Text <> "" Then
+            If Not IsValid() Then mTxt.Text = ""
+        End If
+    End If
+End Sub
+
+'------------------------------------------------------------------------------
+' Publicos
+'------------------------------------------------------------------------------
+' Valor sem mascara: texto "cru" (CPF -> so digitos), numero (MOEDA -> Double)
+Public Function Value() As Variant
+    Select Case mKind
+        Case 0: Value = Strip(mTxt.Text, LastMask())
+        Case 1: Value = mTxt.Text
+        Case 2: Value = Val(DigitsOnly(mTxt.Text)) / 10 ^ mDecimals
+    End Select
+End Function
+
+' Atribui um valor ja formatando (para MOEDA passe um numero: 1234.5)
+Public Sub SetValue(ByVal v As Variant)
+    Dim d As String
+    If mKind = 2 Then
+        d = CStr(Int(CDbl(v) * 10 ^ mDecimals + 0.5))
+        If Len(d) < mDecimals + 1 Then d = String$(mDecimals + 1 - Len(d), "0") & d
+        mTxt.Text = d
+    Else
+        mTxt.Text = CStr(v)
+    End If
+End Sub
+
+' Vazio e considerado valido (trate campo obrigatorio no seu codigo)
+Public Function IsValid() As Boolean
+    Dim t As String, raw As String
+
+    t = mTxt.Text
+    If t = "" Or mKind <> 0 Then IsValid = True: Exit Function
+
+    raw = Strip(t, LastMask())
+    If Len(raw) <> SlotCount(PickMask(Len(raw))) Then Exit Function    ' incompleto
+
+    Select Case mValidation
+        Case "DATA"
+            IsValid = ValidDate(CLng(Mid$(raw, 1, 2)), CLng(Mid$(raw, 3, 2)), CLng(Mid$(raw, 5, 4)))
+        Case "DATAHORA"
+            IsValid = ValidDate(CLng(Mid$(raw, 1, 2)), CLng(Mid$(raw, 3, 2)), CLng(Mid$(raw, 5, 4))) _
+                  And ValidTime(CLng(Mid$(raw, 9, 2)), CLng(Mid$(raw, 11, 2)))
+        Case "HORA"
+            IsValid = ValidTime(CLng(Mid$(raw, 1, 2)), CLng(Mid$(raw, 3, 2)))
+        Case "CPF"
+            IsValid = ValidCPF(raw)
+        Case "CNPJ"
+            IsValid = ValidCNPJ(raw)
+        Case "CPFCNPJ"
+            If Len(raw) = 11 Then IsValid = ValidCPF(raw) Else IsValid = ValidCNPJ(raw)
+        Case Else
+            IsValid = True
+    End Select
+End Function
+
+'------------------------------------------------------------------------------
+' Rotinas de mascara
+'------------------------------------------------------------------------------
+Private Function LastMask() As String
+    LastMask = mMasks(mCount - 1)
+End Function
+
+Private Function IsSlot(ByVal c As String) As Boolean
+    IsSlot = (InStr("9#AX*", c) > 0)
+End Function
+
+Private Function IsDigit(ByVal ch As String) As Boolean
+    IsDigit = (ch >= "0" And ch <= "9")
+End Function
+
+Private Function SlotCount(ByVal mask As String) As Long
+    Dim i As Long, n As Long
+    For i = 1 To Len(mask)
+        If IsSlot(Mid$(mask, i, 1)) Then n = n + 1
+    Next
+    SlotCount = n
+End Function
+
+' Tipo do n-esimo "slot" (posicao editavel) da mascara
+Private Function SlotTypeAt(ByVal mask As String, ByVal n As Long) As String
+    Dim i As Long, k As Long, c As String
+    For i = 1 To Len(mask)
+        c = Mid$(mask, i, 1)
+        If IsSlot(c) Then
+            k = k + 1
+            If k = n Then SlotTypeAt = c: Exit Function
+        End If
+    Next
+End Function
+
+Private Function Accepts(ByVal SlotType As String, ByVal ch As String) As Boolean
+    Dim u As String
+    u = UCase$(ch)
+    Select Case SlotType
+        Case "9", "#": Accepts = (ch >= "0" And ch <= "9")
+        Case "A":      Accepts = (u >= "A" And u <= "Z")
+        Case "X":      Accepts = (ch >= "0" And ch <= "9") Or (u >= "A" And u <= "Z")
+        Case "*":      Accepts = (Asc(ch) >= 32)
+    End Select
+End Function
+
+' Remove os literais: devolve so os caracteres que "cabem" nos slots, em ordem
+Private Function Strip(ByVal Text As String, ByVal mask As String) As String
+    Dim i As Long, n As Long, ch As String, t As String, r As String
+    n = 1
+    For i = 1 To Len(Text)
+        ch = Mid$(Text, i, 1)
+        t = SlotTypeAt(mask, n)
+        If t = "" Then Exit For
+        If Accepts(t, ch) Then
+            If t = "A" Or t = "X" Then ch = UCase$(ch)
+            r = r & ch
+            n = n + 1
+        End If
+    Next
+    Strip = r
+End Function
+
+' Aplica a mascara; literais finais so aparecem quando ha o proximo caractere
+' (assim o Backspace nunca "trava" em um literal)
+Private Function Apply(ByVal Raw As String, ByVal mask As String) As String
+    Dim i As Long, k As Long, c As String, r As String
+    k = 1
+    For i = 1 To Len(mask)
+        If k > Len(Raw) Then Exit For
+        c = Mid$(mask, i, 1)
+        If IsSlot(c) Then
+            r = r & Mid$(Raw, k, 1)
+            k = k + 1
+        Else
+            r = r & c
+        End If
+    Next
+    Apply = r
+End Function
+
+' Escolhe a primeira mascara alternativa que comporta a quantidade digitada
+Private Function PickMask(ByVal RawLen As Long) As String
+    Dim i As Long
+    For i = 0 To mCount - 1
+        If SlotCount(mMasks(i)) >= RawLen Then PickMask = mMasks(i): Exit Function
+    Next
+    PickMask = LastMask()
+End Function
+
+' Posicao do cursor (SelStart) logo apos o RawBefore-esimo caractere digitado
+Private Function CursorPos(ByVal mask As String, ByVal NewLen As Long, _
+                           ByVal RawBefore As Long, ByVal RawTotal As Long) As Long
+    Dim i As Long, k As Long
+    If RawBefore >= RawTotal Then CursorPos = NewLen: Exit Function
+    For i = 1 To Len(mask)
+        If IsSlot(Mid$(mask, i, 1)) Then
+            k = k + 1
+            If k = RawBefore Then CursorPos = i: Exit Function
+        End If
+    Next
+    CursorPos = 0
+End Function
+
+'------------------------------------------------------------------------------
+' Numero / Moeda
+'------------------------------------------------------------------------------
+Private Function DigitsOnly(ByVal s As String) As String
+    Dim i As Long, r As String
+    For i = 1 To Len(s)
+        If IsDigit(Mid$(s, i, 1)) Then r = r & Mid$(s, i, 1)
+    Next
+    DigitsOnly = r
+End Function
+
+' Digitacao "da direita para a esquerda" (como calculadora): 5 -> 0,05 ; 1234567 -> 12.345,67
+Private Function FormatMoney(ByVal Text As String) As String
+    Dim d As String, ip As String, r As String
+
+    d = DigitsOnly(Text)
+    If Len(d) > MAXDIG Then d = Left$(d, MAXDIG)
+
+    Do While Len(d) > mDecimals + 1 And Left$(d, 1) = "0"
+        d = Mid$(d, 2)
+    Loop
+
+    If Len(d) < mDecimals + 1 Then
+        If Len(Replace(d, "0", "")) = 0 Then Exit Function      ' vazio ou so zeros -> limpa
+        d = String$(mDecimals + 1 - Len(d), "0") & d
+    End If
+
+    ip = Left$(d, Len(d) - mDecimals)
+    Do While Len(ip) > 3
+        r = "." & Right$(ip, 3) & r
+        ip = Left$(ip, Len(ip) - 3)
+    Loop
+    r = ip & r
+    If mDecimals > 0 Then r = r & "," & Right$(d, mDecimals)
+    FormatMoney = r
+End Function
+
+'------------------------------------------------------------------------------
+' Validacoes
+'------------------------------------------------------------------------------
+Private Function ValidDate(ByVal d As Long, ByVal m As Long, ByVal y As Long) As Boolean
+    If y < 1900 Or m < 1 Or m > 12 Or d < 1 Then Exit Function
+    ValidDate = (Day(DateSerial(y, m, d)) = d)    ' dia inexistente "rola" p/ o mes seguinte
+End Function
+
+Private Function ValidTime(ByVal h As Long, ByVal mi As Long) As Boolean
+    ValidTime = (h <= 23 And mi <= 59)
+End Function
+
+Private Function ValidCPF(ByVal s As String) As Boolean
+    Dim i As Long, soma As Long, dv As Long
+    If Len(s) <> 11 Then Exit Function
+    If s = String$(11, Mid$(s, 1, 1)) Then Exit Function
+
+    For i = 1 To 9: soma = soma + CLng(Mid$(s, i, 1)) * (11 - i): Next
+    dv = (soma * 10) Mod 11: If dv = 10 Then dv = 0
+    If dv <> CLng(Mid$(s, 10, 1)) Then Exit Function
+
+    soma = 0
+    For i = 1 To 10: soma = soma + CLng(Mid$(s, i, 1)) * (12 - i): Next
+    dv = (soma * 10) Mod 11: If dv = 10 Then dv = 0
+    ValidCPF = (dv = CLng(Mid$(s, 11, 1)))
+End Function
+
+Private Function ValidCNPJ(ByVal s As String) As Boolean
+    Dim p1 As Variant, p2 As Variant, i As Long, soma As Long, dv As Long
+    If Len(s) <> 14 Then Exit Function
+    If s = String$(14, Mid$(s, 1, 1)) Then Exit Function
+
+    p1 = Array(5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2)
+    p2 = Array(6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2)
+
+    For i = 0 To 11: soma = soma + CLng(Mid$(s, i + 1, 1)) * p1(i): Next
+    dv = soma Mod 11: If dv < 2 Then dv = 0 Else dv = 11 - dv
+    If dv <> CLng(Mid$(s, 13, 1)) Then Exit Function
+
+    soma = 0
+    For i = 0 To 12: soma = soma + CLng(Mid$(s, i + 1, 1)) * p2(i): Next
+    dv = soma Mod 11: If dv < 2 Then dv = 0 Else dv = 11 - dv
+    ValidCNPJ = (dv = CLng(Mid$(s, 14, 1)))
+End Function

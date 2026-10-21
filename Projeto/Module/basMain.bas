@@ -29,10 +29,18 @@ Attribute VB_Name = "basMain"
 '
 Option Explicit 'FORÇA DECLARAÇÃO DO TIPO DA VARIÁVEL
 
-Public Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
-
 Public Sub Main()
+  On Error GoTo LogErrorHandler 'ATIVA O TRATAMENTO DE ERROS
   frmMain.Show vbModal
+  Exit Sub
+  'TRATAMENTO DE ERROS
+LogErrorHandler:
+  On Error Resume Next 'IGNORA O TRATAMENTO DE ERROS DO VB.
+  Screen.MousePointer = vbDefault
+  '------------------------------------
+  ' EXIBE MENSAGEM AMIGÁVEL AO USUÁRIO
+  '------------------------------------
+  MsgBox Err.Number & ", " & Err.Description, vbExclamation Or vbOKOnly, "Atenção"
 End Sub
 
 '--------------------------------------------------------------------------------
@@ -47,7 +55,7 @@ End Sub
 '
 ' Parameters : Frm é o objeto Form que deseja realizar a varredura
 '--------------------------------------------------------------------------------
-Public Sub valorPadraoTextBox(ByRef Frm As Form)
+Public Sub valorPadraoTextBox(ByRef frm As Form)
   '---------------------
   ' DEFINIÇÃO VARIÁVEIS
   '---------------------
@@ -55,7 +63,7 @@ Public Sub valorPadraoTextBox(ByRef Frm As Form)
   '
   On Error GoTo LogErrorHandler 'ATIVA O TRATAMENTO DE ERROS
   '
-  For Each Objeto In Frm
+  For Each Objeto In frm
     Select Case TypeName(Objeto)
       Case "TextBox"
         Objeto.Text = Objeto.Tag

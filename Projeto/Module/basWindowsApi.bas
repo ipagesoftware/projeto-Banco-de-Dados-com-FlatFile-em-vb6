@@ -86,12 +86,23 @@ Public Function PastaTemp() As String
   Dim Buffer  As String
   Dim Tamanho As Long
   '
+  On Error GoTo LogErrorHandler 'ATIVA O TRATAMENTO DE ERROS
+  '
   Buffer = String$(260, vbNullChar)
   Tamanho = GetTempPath(260, Buffer)
   '
   If Tamanho > 0 Then
     PastaTemp = Left$(Buffer, Tamanho)
   End If
+  Exit Function
+  'TRATAMENTO DE ERROS
+LogErrorHandler:
+  On Error Resume Next 'IGNORA O TRATAMENTO DE ERROS DO VB.
+  Screen.MousePointer = vbDefault
+  '------------------------------------
+  ' EXIBE MENSAGEM AMIGÁVEL AO USUÁRIO
+  '------------------------------------
+  MsgBox Err.Number & ", " & Err.Description, vbExclamation Or vbOKOnly, "Atenção"
 End Function
 
 '--------------------------------------------------------------------------------
@@ -113,6 +124,8 @@ Public Function CriarArquivoTemp(ByVal Prefixo As String) As String
   Dim Retorno As Long
   Dim Pasta   As String
   '
+  On Error GoTo LogErrorHandler 'ATIVA O TRATAMENTO DE ERROS
+  '
   Pasta = PastaTemp()
   Buffer = String$(260, vbNullChar)
   Retorno = GetTempFileName(Pasta, Prefixo, 0, Buffer)
@@ -120,6 +133,15 @@ Public Function CriarArquivoTemp(ByVal Prefixo As String) As String
   If Retorno <> 0 Then
     CriarArquivoTemp = Left$(Buffer, InStr(Buffer, vbNullChar) - 1)
   End If
-
+  '
+  Exit Function
+  'TRATAMENTO DE ERROS
+LogErrorHandler:
+  On Error Resume Next 'IGNORA O TRATAMENTO DE ERROS DO VB.
+  Screen.MousePointer = vbDefault
+  '------------------------------------
+  ' EXIBE MENSAGEM AMIGÁVEL AO USUÁRIO
+  '------------------------------------
+  MsgBox Err.Number & ", " & Err.Description, vbExclamation Or vbOKOnly, "Atenção"
 End Function
 

@@ -1,7 +1,7 @@
-frmMain = 52, 52, 814, 614, C, 26, 26, 788, 588, C
-frmNone = 0, 0, 0, 0, C, 0, 0, 0, 0, C
+frmMain = 52, 52, 814, 614, , 26, 26, 788, 588, C
+frmNone = 260, 260, 1000, 822, , 130, 130, 892, 692, C
 frmFixedDialog = 26, 26, 788, 588, C, 0, 0, 434, 562, C
-frmSizableToolWindow = 0, 0, 0, 0, C, 104, 104, 866, 666, C
-frmSizable = 0, 0, 0, 0, C, 0, 0, 0, 0, C
+frmSizableToolWindow = 26, 26, 766, 588, Z, 171, 182, 933, 744, C
+frmSizable = 0, 0, 963, 389, , 156, 156, 918, 718, C
 frmFixedSingle = 0, 0, 0, 0, C, 130, 130, 892, 692, C
 frmFixedToolWindow = 52, 52, 814, 614, C, 434, 3, 792, 562, C
