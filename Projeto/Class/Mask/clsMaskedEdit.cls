@@ -55,7 +55,8 @@ Option Explicit
 
 Private mItems As Collection
 
-' True = ao sair do campo (LostFocus) apaga o conteudo se estiver invalido/incompleto.
+' True = ao sair do campo (LostFocus) apaga o conteudo se estiver
+' invalido/incompleto.
 ' Defina ANTES de chamar Format.
 Public ClearOnInvalid As Boolean
 
