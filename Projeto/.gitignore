@@ -1,3 +1,6 @@
-# Pastas de saída e temporárias
+# Arquivos a serem ignorados
 /Report/produto - Copia.html
 /Report/template.html
+/DataBase/produtos - Copia.dat
+/DataBase/estrutura.dat
+
